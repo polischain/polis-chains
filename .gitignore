@@ -1,0 +1,13 @@
+# IDE
+.idea/
+
+# Node
+node_modules/
+
+# Solidity
+contracts/flat/
+
+# App
+.env
+cache/
+artifacts/

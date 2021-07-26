@@ -1,0 +1,25 @@
+{
+  "name": "polis-chains-spec",
+  "version": "1.0.0",
+  "description": "Polis networks specification files",
+  "repository": "https://github.com/eabz/polis-chains-spec.git",
+  "author": "eabz <eabz@polispay.org>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "compile": "npm run flat && hardhat compile",
+    "flat": "bash scripts/make_flat.sh",
+    "deploy:test": "hardhat run --network hardhat scripts/deploy_posdao.js",
+    "deploy:sparta": "hardhat run --network sparta scripts/deploy_posdao.js"
+  },
+  "engines": {
+    "node": "^12"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-ethers": "2.0.2",
+    "@nomiclabs/hardhat-waffle": "2.0.1",
+    "@poanet/solidity-flattener": "3.0.6",
+    "dotenv": "10.0.0",
+    "hardhat": "2.5.0"
+  }
+}

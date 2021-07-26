@@ -1,0 +1,196 @@
+{
+  "name": "Sparta Chain",
+  "dataDir": "sparta",
+  "engine": {
+    "authorityRound": {
+      "params": {
+        "stepDuration": 5,
+        "blockReward": "0",
+        "maximumUncleCountTransition": 0,
+        "maximumUncleCount": 0,
+        "validators": {
+          "multi": {
+            "0": {
+              "list": [
+                "0x2ea3540836d4919ce760a9dc29b75f42606af26c"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "params": {
+    "gasLimitBoundDivisor": "0x400",
+    "maximumExtraDataSize": "0x20",
+    "minGasLimit": "0x1388",
+    "networkID": "333888",
+    "eip140Transition": "0x0",
+    "eip211Transition": "0x0",
+    "eip214Transition": "0x0",
+    "eip658Transition": "0x0",
+    "eip145Transition": "0x0",
+    "eip1014Transition": "0x0",
+    "eip1052Transition": "0x0",
+    "eip1283Transition": "0x0",
+    "eip1344Transition": "0x0",
+    "eip1706Transition": "0x0",
+    "eip1884Transition": "0x0",
+    "eip2028Transition": "0x0",
+    "eip2929Transition": "0x0",
+    "eip2930Transition": "0x0"
+  },
+  "genesis": {
+    "seal": {
+      "authorityRound": {
+        "step": "0x0",
+        "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "difficulty": "0x20000",
+    "gasLimit": "0x5F5E100"
+  },
+  "nodes": [
+    "enode://afbb67a1cb906b7697d5881fe1588287c61d987ac4af4f3c861e98c4a832f3ac4434d1cbcce89a0afa73f8daefe64f761af09f2ce94c4f8cae083441bb3da922@134.122.18.23:30303",
+    "enode://b8c1ddfe0b9e3d7862e8142d641a94b05b3ff3309aba0e9dead5dc64bdf5f4797bacca61e216979ab8f86ceb8bba422bd04ac6427bc02baf65f762a60ed64e8b@134.209.115.75:30303",
+    "enode://fa72584ced5ec840e5faa742479de6de730e1e12c60edff43ace6e4598e16006f33bee5efd5b0c815713efc12e6edd9d245d24d08a33cf0a7d046a488479fe9b@143.198.174.1:30303"
+  ],
+  "accounts": {
+    "0000000000000000000000000000000000000005": {
+      "builtin": {
+        "name": "modexp",
+        "pricing": {
+          "0": {
+            "price": {
+              "modexp2565": {}
+            }
+          }
+        }
+      }
+    },
+    "0000000000000000000000000000000000000006": {
+      "builtin": {
+        "name": "alt_bn128_add",
+        "pricing": {
+          "0": {
+            "price": {
+              "alt_bn128_const_operations": {
+                "price": 150
+              }
+            }
+          }
+        }
+      }
+    },
+    "0000000000000000000000000000000000000007": {
+      "builtin": {
+        "name": "alt_bn128_mul",
+        "pricing": {
+          "0": {
+            "price": {
+              "alt_bn128_const_operations": {
+                "price": 6000
+              }
+            }
+          }
+        }
+      }
+    },
+    "0000000000000000000000000000000000000008": {
+      "builtin": {
+        "name": "alt_bn128_pairing",
+        "pricing": {
+          "0": {
+            "price": {
+              "alt_bn128_pairing": {
+                "base": 45000,
+                "pair": 34000
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000009": {
+      "builtin": {
+        "name": "blake2_f",
+        "pricing": {
+          "0": {
+            "price": {
+              "blake2_f": {
+                "gas_per_round": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000001": {
+      "balance": "1",
+      "builtin": {
+        "name": "ecrecover",
+        "pricing": {
+          "0": {
+            "price": {
+              "linear": {
+                "base": 3000,
+                "word": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000002": {
+      "balance": "1",
+      "builtin": {
+        "name": "sha256",
+        "pricing": {
+          "0": {
+            "price": {
+              "linear": {
+                "base": 60,
+                "word": 12
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000003": {
+      "balance": "1",
+      "builtin": {
+        "name": "ripemd160",
+        "pricing": {
+          "0": {
+            "price": {
+              "linear": {
+                "base": 600,
+                "word": 120
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000004": {
+      "balance": "1",
+      "builtin": {
+        "name": "identity",
+        "pricing": {
+          "0": {
+            "price": {
+              "linear": {
+                "base": 15,
+                "word": 3
+              }
+            }
+          }
+        }
+      }
+    },
+    "0xeD86b5962a1a73aFad7181f0B3e427A93Ce8E552": {
+      "balance": "25000000000000000000000000"
+    }
+  }
+}
