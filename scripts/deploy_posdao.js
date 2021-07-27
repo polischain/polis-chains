@@ -80,7 +80,7 @@ async function main() {
 
     console.log("Initializing ValidatorSetAuRa")
     const validatorSetProxyAccess = ValidatorSetAuRa.attach(validatorSetProxy.address)
-    await validatorSetProxyAccess.initialize(
+    let tx = await validatorSetProxyAccess.initialize(
         blockRewardProxy.address,
         governanceProxy.address,
         randomProxy.address,
@@ -89,21 +89,24 @@ async function main() {
         initial_stakers,
         process.env.FIRST_VALIDATOR_UNREMOVABLE
     )
+    await tx.wait()
 
     console.log("Initializing BlockRewardAuRa")
     const blockRewardProxyAccess = BlockRewardAuRa.attach(blockRewardProxy.address)
-    await blockRewardProxyAccess.initialize(
+    tx = await blockRewardProxyAccess.initialize(
         validatorSetProxy.address,
         owner.address
     )
+    await tx.wait()
 
     console.log("Initializing RandomAuRa")
     const randomProxyAccess = RandomAuRa.attach(randomProxy.address)
-    await randomProxyAccess.initialize(
+    tx = await randomProxyAccess.initialize(
         process.env.COLLECT_ROUND_LENGTH,
         validatorSetProxy.address,
         true
     )
+    await tx.wait()
 
     let ids = []
 
@@ -114,7 +117,7 @@ async function main() {
 
     console.log("Initializing StakingAuRa")
     const stakingProxyAccess = StakingAuRa.attach(stakingProxy.address)
-    await stakingProxyAccess.initialize(
+    tx = await stakingProxyAccess.initialize(
         validatorSetProxy.address,
         governanceProxy.address,
         ids,
@@ -124,27 +127,31 @@ async function main() {
         process.env.EPOCH_START_BLOCK,
         process.env.STAKE_WITHDRAWAL_DISALLOW_PERIOD
     )
+    await tx.wait()
 
     console.log("Initializing Governance")
     const governanceProxyAccess = Governance.attach(governanceProxy.address)
-    await governanceProxyAccess.initialize(
+    tx = await governanceProxyAccess.initialize(
         validatorSetProxy.address
     )
+    await tx.wait()
 
     console.log("Initializing TxPermission")
     const txPermissionProxyAccess = TxPermission.attach(txPermissionProxy.address)
-    await txPermissionProxyAccess.initialize(
+    tx = await txPermissionProxyAccess.initialize(
         [owner.address],
         certifierProxy.address,
         validatorSetProxy.address,
     )
+    await tx.wait()
 
     console.log("Initializing Certifier")
     const certifierProxyAccess = Certifier.attach(certifierProxy.address)
-    await certifierProxyAccess.initialize(
+    tx = await certifierProxyAccess.initialize(
         [owner.address],
         validatorSetProxy.address
     )
+    await tx.wait()
 
     console.log("\n AuRa Deployment Finished: \n")
     console.log("Please add the following information to the chain spec json:")
