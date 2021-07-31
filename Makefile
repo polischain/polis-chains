@@ -13,6 +13,7 @@ sparta-rpc:
 		-e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
 		-e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
 		-p 8545:8545 \
+		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
  		-v /root/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
@@ -24,10 +25,7 @@ sparta-validator:
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_INITCONFIG_ISMINING="true" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="100000000" \
-		-e NETHERMIND_AURACONFIG_ALLOWAURAPRIVATECHAINS="true" \
-		-e NETHERMIND_INITCONFIG_EnableUnsecuredDevWallet=true \
 		-e NETHERMIND_MININGCONFIG_TARGETBLOCKGASLIMIT="20000000" \
-		-e NETHERMIND_KEYSTORECONFIG_TESTNODEKEY=$(KEY) \
 		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
 		-v /root/passwords/:/nethermind/passwords/ \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
