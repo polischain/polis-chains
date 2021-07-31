@@ -1,7 +1,8 @@
 sparta:
 	@echo "==> Starting a Polis node with Sparta config"
-	@docker run \
+	@docker run -d \
 		-e NETHERMIND_CONFIG=sparta \
+		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
  		-v /root/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
@@ -20,7 +21,7 @@ sparta-rpc:
 
 sparta-validator:
 	@echo "==> Starting a Polis node with Sparta config and enabled for mining"
-	@docker run \
+	@docker run -d \
 		-p 30303:30303 \
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_INITCONFIG_ISMINING="true" \
