@@ -26,6 +26,7 @@ sparta-validator:
 		-e NETHERMIND_KEYSTORECONFIG_PASSWORDFILES=/nethermind/passwords/node.pwd \
 		-e NETHERMIND_KEYSTORECONFIG_UNLOCKACCOUNTS=$(ACCOUNT) \
 		-e NETHERMIND_KEYSTORECONFIG_BLOCKAUTHORACCOUNT=$(ACCOUNT) \
+		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json
 		-v /root/passwords/:/nethermind/passwords/ \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
  		-v /root/keystore/:/nethermind/keystore \
