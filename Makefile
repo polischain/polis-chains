@@ -24,8 +24,12 @@ sparta-validator:
 		-p 30303:30303 \
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_INITCONFIG_ISMINING="true" \
+		-e NETHERMIND_MININGCONFIG_ENABLED="true" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="100000000" \
 		-e NETHERMIND_MININGCONFIG_TARGETBLOCKGASLIMIT="20000000" \
+		-e NETHERMIND_KEYSTORECONFIG_BLOCKAUTHORACCOUNT=$(ACCOUNT) \
+		-e NETHERMIND_KEYSTORECONFIG_UNLOCKACCOUNTS=$(ACCOUNT) \
+		-e NETHERMIND_KEYSTORECONFIG_PASSWORDFILES=/nethermind/passwords/node.pwd \
 		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
 		-v /root/passwords/:/nethermind/passwords/ \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
