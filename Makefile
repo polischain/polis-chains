@@ -24,7 +24,7 @@ sparta-validator:
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_INITCONFIG_ISMINING="true" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="100000000" \
-		-e NETHERMIND_KEYSTORECONFIG_EnableUnsecuredDevWallet=true \
+		-e NETHERMIND_INITCONFIG_EnableUnsecuredDevWallet=true \
 		-e NETHERMIND_MININGCONFIG_TARGETBLOCKGASLIMIT="20000000" \
 		-e NETHERMIND_KEYSTORECONFIG_TESTNODEKEY=$(KEY) \
 		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
