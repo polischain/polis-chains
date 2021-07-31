@@ -20,6 +20,7 @@ sparta-rpc:
 sparta-validator:
 	@echo "==> Starting a Polis node with Sparta config and enabled for mining"
 	@docker run \
+		-p 30303:30303 \
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_MININGCONFIG_ENABLED=true \
 		-e NETHERMIND_INITCONFIG_ISMINING=true \
