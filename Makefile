@@ -11,6 +11,7 @@ sparta-rpc:
 	@echo "==> Starting a Polis node with Sparta config and JSON RPC exposed"
 	@docker run -d \
 		-e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_INITCONF_WEBSOCKETENABLED=true \
 		-e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
 		-e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
 		-p 8545:8545 \
