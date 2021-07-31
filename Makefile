@@ -23,8 +23,8 @@ sparta-validator:
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_MININGCONFIG_ENABLED=true \
 		-e NETHERMIND_KEYSTORECONFIG_PASSWORD_FILES=/nethermind/passwords/ \
-		-e NETHERMIND_KEYSTORECONFIG_UNLOCK_ACCOUNTS=($ACCOUNT) \
-		-e NETHERMIND_KEYSTORECONFIG_BLOCK_AUTHOR_ACCOUNT=($ACCOUNT) \
+		-e NETHERMIND_KEYSTORECONFIG_UNLOCK_ACCOUNTS=$ACCOUNT \
+		-e NETHERMIND_KEYSTORECONFIG_BLOCK_AUTHOR_ACCOUNT=$ACCOUNT \
 		-v /root/passwords/:/nethermind/passwords/ \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
  		-v /root/keystore/:/nethermind/keystore \
