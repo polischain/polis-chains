@@ -9,13 +9,13 @@ module.exports = {
         hardhat: {
             chainId: 333888,
             forking: {
-                url: "https://sparta1.polispay.org",
+                url: "https://sparta-rpc.polis.tech",
             },
         },
         sparta: {
             chainId: 333888,
             gasPrice: 1000000000,
-            url: "https://sparta1.polispay.org",
+            url: "https://sparta-rpc.polis.tech",
             accounts: [private_key]
         }
     },
