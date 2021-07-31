@@ -156,6 +156,7 @@ async function main() {
     console.log("\n AuRa Deployment Finished: \n")
     console.log("Please add the following information to the chain spec json:")
     console.log("ValidatorAuRa:     ", validatorSetProxy.address)
+    console.log("StakingAuRa:       ", stakingProxy.address)
     console.log("BlockRewardAuRa:   ", blockRewardProxy.address)
     console.log("TxPermission:      ", txPermissionProxy.address)
     console.log("Registry:          ", registry.address)
