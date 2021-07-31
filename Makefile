@@ -1,7 +1,26 @@
+sparta:
+	@echo "==> Starting a Polis node with Sparta config"
+	@docker run -e NETHERMIND_CONFIG=sparta \
+ 		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
+ 		-v /root/logs/:/nethermind/logs/ \
+ 		ghcr.io/polischain/polis-chains:main
+
 sparta-rpc:
-	@echo "==> Starting nethermind"
-	@docker run -d --name $(NODE_CONTAINER_NAME) ghcr.io/polischain/nodes-dockerized:main \
-		-v ./nethermind_db/:/nethermind/nethermind_db/ \
-		-v ./keystore/:/nethermind/keystore/ \
-		-v ./logs/:/nethermind/logs/ \
-		/bin/sh -c "--config sparta"
+	@echo "==> Starting a Polis node with Sparta config and JSON RPC exposed"
+	@docker run -e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
+		-e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
+		-p 8545:8545 \
+ 		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
+ 		-v /root/logs/:/nethermind/logs/ \
+ 		ghcr.io/polischain/polis-chains:main
+
+sparta-validator:
+	@echo "==> Starting a Polis node with Sparta config and enabled for mining"
+	@docker run -e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_MININGCONFIG_ENABLED=true \
+ 		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
+ 		-v /root/keystore/:/nethermind/keystore \
+ 		-v /root/logs/:/nethermind/logs/ \
+ 		ghcr.io/polischain/polis-chains:main
+
