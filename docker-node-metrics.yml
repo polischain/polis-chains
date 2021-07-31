@@ -47,10 +47,12 @@ services:
             - ./grafana/:/etc/grafana/provisioning/
 
     nethermind:
-        image: ghcr.io/polischain/nodes-dockerized:main
+        image: ghcr.io/polischain/polis-chains:main
         container_name: nethermind
         restart: unless-stopped
-        command: '--config sparta --Metrics.Enabled true'
+        environment:
+            - NETHERMIND_CONFIG=sparta
+            - NETHERMIND_METRICSCONFIG_ENABLED = true
         network_mode: host
         volumes:
             - ./nethermind_db/:/nethermind/nethermind_db/

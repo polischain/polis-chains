@@ -11,3 +11,6 @@ contracts/flat/
 .env
 cache/
 artifacts/
+keystore/
+logs/
+nethermind_db/
