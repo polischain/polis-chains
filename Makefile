@@ -12,9 +12,11 @@ sparta-rpc:
 	@docker run -d \
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_INITCONFIG_WEBSOCKETSENABLED=true \
+		-e NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT=8546 \
 		-e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
 		-e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
 		-p 8545:8545 \
+		-p 8546:8546 \
 		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
  		-v /root/logs/:/nethermind/logs/ \
