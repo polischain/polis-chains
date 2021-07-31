@@ -5,6 +5,7 @@ sparta:
 		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
  		-v /root/logs/:/nethermind/logs/ \
+ 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
  		ghcr.io/polischain/polis-chains:main
 
 sparta-rpc:
@@ -29,7 +30,7 @@ sparta-validator:
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_INITCONFIG_ISMINING="true" \
 		-e NETHERMIND_MININGCONFIG_ENABLED="true" \
-		-e NETHERMIND_MININGCONFIG_MINGASPRICE="100000000" \
+		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
 		-e NETHERMIND_MININGCONFIG_TARGETBLOCKGASLIMIT="20000000" \
 		-e NETHERMIND_KEYSTORECONFIG_BLOCKAUTHORACCOUNT=$(ACCOUNT) \
 		-e NETHERMIND_KEYSTORECONFIG_UNLOCKACCOUNTS=$(ACCOUNT) \
