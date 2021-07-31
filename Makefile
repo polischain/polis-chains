@@ -22,7 +22,7 @@ sparta-validator:
 	@docker run \
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_MININGCONFIG_ENABLED=true \
-		-e NETHERMIND_KEYSTORECONFIG_PASSWORDFILES=/nethermind/passwords/ \
+		-e NETHERMIND_KEYSTORECONFIG_PASSWORDFILES=/nethermind/passwords/node.pwd \
 		-e NETHERMIND_KEYSTORECONFIG_UNLOCKACCOUNTS=$(ACCOUNT) \
 		-e NETHERMIND_KEYSTORECONFIG_BLOCKAUTHORACCOUNT=$(ACCOUNT) \
 		-v /root/passwords/:/nethermind/passwords/ \
