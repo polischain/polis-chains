@@ -27,6 +27,10 @@ sparta-validator:
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="100000000" \
 		-e NETHERMIND_MININGCONFIG_TARGETBLOCKGASLIMIT="20000000" \
 		-e NETHERMIND_KEYSTORECONFIG_TESTNODEKEY=$(KEY) \
+		-e NETHERMIND_SYNCCONFIG_FASTSYNC="true" \
+        -e NETHERMIND_SYNCCONFIG_FASTBLOCKS="true" \
+        -e NETHERMIND_SYNCCONFIG_DOWNLOADBODIESINFASTSYNC="false" \
+        -e NETHERMIND_SYNCCONFIG_DOWNLOADRECEIPTSINFASTSYNC="false" \
 		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
 		-v /root/passwords/:/nethermind/passwords/ \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
