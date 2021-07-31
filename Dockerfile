@@ -7,14 +7,9 @@ RUN git clone https://github.com/NethermindEth/nethermind --recursive
 
 WORKDIR /nethermind
 
-RUN git clone https://github.com/polischain/polis-chains-spec
-
-RUN cp polis-chains-spec/specs/* src/Nethermind/Chains
-
-RUN cp polis-chains-spec/configs/sparta/* src/Nethermind/Nethermind.Runner/configs
-#RUN cp polis-chains-spec/configs/athene/* src/Nethermind/Nethermind.Runner/configs
-
-RUN rm -r polis-chains-spec
+COPY specs/* src/Nethermind/Chains
+COPY configs/sparta/* src/Nethermind/Nethermind.Runner/configs
+#COPY configs/athene/* src/Nethermind/Nethermind.Runner/configs
 
 RUN dotnet publish src/Nethermind/Nethermind.Runner -r linux-x64 -c release -o out
 
