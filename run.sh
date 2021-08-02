@@ -77,15 +77,6 @@ case "$TYPE" in
   bash scripts/docker.sh &> /dev/null
   run_sparta_simple
 ;;
-"explorer")
-  echo "==> Running a node for SPARTA with and blockscout instance"
-  echo "==> Checking docker installation..."
-  bash scripts/docker.sh
-  echo "==> Checking rust installation..."
-  bash scripts/rust.sh
-  echo "==> Checking node installation..."
-  bash scripts/node.sh
-;;
 *)
     echo "Unknown configuration type for SPARTA please specify a node setup: rpc, explorer, validator, node"
     ;;
