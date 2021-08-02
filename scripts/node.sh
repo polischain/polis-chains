@@ -17,6 +17,8 @@ fi
 
 function install() {
   echo "Installing Node..."
+  curl --silent https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+  source /root/.bashrc
 }
 
 check
