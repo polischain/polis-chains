@@ -3,8 +3,7 @@
 function check() {
 if [ $? -eq 0 ]
 then
-    . "$HOME"/.nvm/nvm.sh
-    . "$HOME"/.nvm/bash_completion
+    . /root/.bashrc
     node --version | grep "cargo" &> /dev/null
     if [ $? -eq 0 ]
     then
@@ -20,8 +19,7 @@ fi
 function install() {
   echo "Installing Node..."
   curl --silent https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-  . "$HOME"/.nvm/nvm.sh
-  . "$HOME"/.nvm/bash_completion
+  . /root/.bashrc
   nvm install 14.17.0
 }
 
