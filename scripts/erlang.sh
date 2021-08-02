@@ -17,6 +17,7 @@ fi
 
 function install() {
   echo "Installing Erlang..."
+  apt install zip -y
 	git clone https://github.com/robisonsantos/evm
 	cd evm && ./install
 	echo 'source $HOME/.evm/scripts/evm' > ~/.bashrc
