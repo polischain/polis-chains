@@ -15,6 +15,23 @@ function run_sparta_simple() {
  		ghcr.io/polischain/polis-chains:main
 }
 
+function run_sparta_rpc_internal() {
+  echo "==> Starting Polis node on SPARTA network and JSON RPC for internal use"
+  docker run -d \
+		-e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_INITCONFIG_WEBSOCKETSENABLED=true \
+		-e NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT=8546 \
+		-e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health \
+		-e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
+		-e NETHERMIND_JSONRPCCONFIG_HOST=127.0.0.1 \
+		-p 8545:8545 \
+		-p 8546:8546 \
+		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
+ 		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
+ 		-v /root/logs/:/nethermind/logs/ \
+ 		ghcr.io/polischain/polis-chains:main
+}
+
 function run_sparta_rpc() {
   echo "==> Starting Polis node on SPARTA network and JSON RPC exposed"
   docker run -d \
@@ -23,7 +40,7 @@ function run_sparta_rpc() {
 		-e NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT=8546 \
 		-e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health \
 		-e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
-		-e NETHERMIND_JSONRPCCONFIG_HOST=127.0.0.1 \
+		-e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
 		-p 8545:8545 \
 		-p 8546:8546 \
 		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
@@ -59,6 +76,12 @@ case "$TYPE" in
   echo "==> Checking docker installation..."
   bash scripts/docker.sh &> /dev/null
   run_sparta_rpc
+;;
+"rpc-internal")
+  echo "==> Running a node for SPARTA configured with internal RPC"
+  echo "==> Checking docker installation..."
+  bash scripts/docker.sh &> /dev/null
+  run_sparta_rpc_internal
 ;;
 "validator")
   echo "==> Running a node for SPARTA configured with validator configuration"
