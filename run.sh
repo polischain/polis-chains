@@ -1,7 +1,7 @@
 #!/bin/bash
 
-
 function check_docker() {
+
 which docker
 
 if [ $? -eq 0 ]
@@ -16,6 +16,7 @@ then
 else
     install_docker >&2
 fi
+}
 
 function install_docker() {
     echo "Installing Docker...";
