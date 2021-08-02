@@ -3,6 +3,8 @@
 function check() {
 if [ $? -eq 0 ]
 then
+    . "$HOME"/.nvm/nvm.sh
+    . "$HOME"/.nvm/bash_completion
     node --version | grep "cargo" &> /dev/null
     if [ $? -eq 0 ]
     then
