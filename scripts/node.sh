@@ -18,7 +18,8 @@ fi
 function install() {
   echo "Installing Node..."
   curl --silent https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  export NVM_DIR="$HOME/.nvm"
+  . "$NVM_DIR/nvm.sh"
   nvm install 14.17.0
 }
 
