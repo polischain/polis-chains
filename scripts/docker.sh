@@ -8,10 +8,10 @@ then
     then
         echo "Docker is already installed"
     else
-        install_docker
+        install
     fi
 else
-    install_docker
+    install
 fi
 }
 
