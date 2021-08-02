@@ -2,11 +2,9 @@
 
 function check_docker() {
 
-which docker
-
 if [ $? -eq 0 ]
 then
-    docker --version | grep "Docker version"
+    docker --version | grep "Docker version" &> /dev/null
     if [ $? -eq 0 ]
     then
         echo "Docker is already installed"
