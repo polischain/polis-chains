@@ -1,9 +1,13 @@
 sparta-explorer:
 	@echo "==> Starting a Polis Explorer with its own node and database"
+
 	@echo "==> Installing Rust"
 	curl https://sh.rustup.rs -sSf | sh -s -- -y &> /dev/null
-    source $(HOME)/.cargo/env
+
 	@echo "==> Installing Node"
+	curl --silent https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash &> /dev/null
+	source ~/.bashrc
+	nvm install 14.17.0 &> /dev/null
 	@echo "==> Installing Elixir"
 	@echo "==> Installing Erlang"
 	@docker run -d \
