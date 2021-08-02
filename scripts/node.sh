@@ -18,8 +18,7 @@ fi
 function install() {
   echo "Installing Node..."
   curl --silent https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-  alias brc='source ~/.bashrc'
-  nvm install 14.17.0
+  exec bash nvm install 14.17.0
 }
 
 check
