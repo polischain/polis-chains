@@ -5,8 +5,8 @@ TYPE=$2
 ACCOUNT=$3
 
 function run_sparta_simple() {
-    @echo "==> Starting Polis node on SPARTA network"
-  	@docker run -d \
+    echo "==> Starting Polis node on SPARTA network"
+  	docker run -d \
 		-e NETHERMIND_CONFIG=sparta \
 		-v /root/polis-chains/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
  		-v /root/nethermind_db/:/nethermind/nethermind_db/ \
@@ -16,8 +16,8 @@ function run_sparta_simple() {
 }
 
 function run_sparta_rpc() {
-  @echo "==> Starting Polis node on SPARTA network and JSON RPC exposed"
-  @docker run -d \
+  echo "==> Starting Polis node on SPARTA network and JSON RPC exposed"
+  docker run -d \
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_INITCONFIG_WEBSOCKETSENABLED=true \
 		-e NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT=8546 \
@@ -33,8 +33,8 @@ function run_sparta_rpc() {
 }
 
 function run_sparta_validator() {
-  @echo "==> Starting Polis node on SPARTA network and enabled for mining"
-	@docker run -d \
+  echo "==> Starting Polis node on SPARTA network and enabled for mining"
+	docker run -d \
 		-p 30303:30303 \
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_INITCONFIG_ISMINING="true" \
