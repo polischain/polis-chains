@@ -79,6 +79,10 @@ case "$TYPE" in
 ;;
 "explorer")
   echo "==> Running a node for SPARTA with and blockscout instance"
+  echo "==> Checking docker installation..."
+  bash scripts/docker.sh &> /dev/null
+  echo "==> Checking rust installation..."
+  bash scripts/rust.sh &> /dev/null
 
 ;;
 *)
