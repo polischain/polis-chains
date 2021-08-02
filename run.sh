@@ -1,7 +1,53 @@
 #!/bin/bash
 
-function check_docker() {
 
+function check_rust() {
+if [ $? -eq 0 ]
+then
+    cargo --version | grep "Cargo" &> /dev/null
+    if [ $? -eq 0 ]
+    then
+        echo "Rust is already installed"
+    else
+        install_rust
+    fi
+else
+    install_docker
+fi
+}
+
+function install_rust() {
+  echo "Installing Rust..."
+	curl https://sh.rustup.rs -sSf | sh -s -- -y
+  source ~/.bashrc
+}
+
+function check_node() {
+  echo ""
+}
+
+function install_node() {
+  echo ""
+}
+
+function check_elixir() {
+  echo ""
+}
+
+function install_elixir() {
+  echo ""
+}
+
+function check_erlang() {
+  echo ""
+}
+
+function install_erlang() {
+    echo ""
+}
+
+## Docker Check
+function check_docker() {
 if [ $? -eq 0 ]
 then
     docker --version | grep "Docker version" &> /dev/null
@@ -12,10 +58,11 @@ then
         install_docker
     fi
 else
-    install_docker >&2
+    install_docker
 fi
 }
 
+## Docker Install
 function install_docker() {
     echo "Installing Docker...";
     sudo apt-get update && sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release -y
@@ -25,4 +72,4 @@ function install_docker() {
     sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 }
 
-check_docker
+check_rust
