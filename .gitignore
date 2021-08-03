@@ -12,5 +12,6 @@ contracts/flat/
 cache/
 artifacts/
 keystore/
+passwords/
 logs/
-nethermind_db/
+db/
