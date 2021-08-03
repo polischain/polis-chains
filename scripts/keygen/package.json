@@ -1,0 +1,9 @@
+{
+  "name": "keygen",
+  "license": "MIT",
+  "repository": "https://github.com/polischain/polis-chains",
+  "description": "Simple script to generate ethereum keys on json files",
+  "dependencies": {
+    "keythereum": "1.2.0"
+  }
+}

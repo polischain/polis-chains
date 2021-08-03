@@ -9,9 +9,9 @@ function run_sparta_simple() {
   	docker run -d \
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
-		-v "`pwd`"/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
- 		-v "`pwd`"/nethermind_db/:/nethermind/nethermind_db/ \
- 		-v "`pwd`"/logs/:/nethermind/logs/ \
+		-v "$(pwd)"/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
+ 		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
+ 		-v "$(pwd)"/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
 }
 
@@ -26,9 +26,9 @@ function run_sparta_rpc() {
 		-e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
 		-p 8545:8545 \
 		-p 8546:8546 \
-		-v "`pwd`"/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
- 		-v "`pwd`"/nethermind_db/:/nethermind/nethermind_db/ \
- 		-v "`pwd`"/logs/:/nethermind/logs/ \
+		-v "$(pwd)"/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
+ 		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
+ 		-v "$(pwd)"/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
 }
 
@@ -43,12 +43,12 @@ function run_sparta_validator() {
 		-e NETHERMIND_MININGCONFIG_TARGETBLOCKGASLIMIT="20000000" \
 		-e NETHERMIND_KEYSTORECONFIG_BLOCKAUTHORACCOUNT="$ACCOUNT" \
 		-e NETHERMIND_KEYSTORECONFIG_UNLOCKACCOUNTS="$ACCOUNT" \
-		-e NETHERMIND_KEYSTORECONFIG_PASSWORDFILES=/nethermind/passwords/node.pwd \
-		-v "`pwd`"/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
-		-v "`pwd`"/passwords/:/nethermind/passwords/ \
- 		-v "`pwd`"/nethermind_db/:/nethermind/nethermind_db/ \
- 		-v "`pwd`"/keystore/:/nethermind/keystore \
- 		-v "`pwd`"/logs/:/nethermind/logs/ \
+		-e NETHERMIND_KEYSTORECONFIG_PASSWORDFILES=/nethermind/passwords/"$ACCOUNT" \
+		-v "$(pwd)"/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
+		-v "$(pwd)"/passwords/:/nethermind/passwords/ \
+ 		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
+ 		-v "$(pwd)"/keystore/:/nethermind/keystore \
+ 		-v "$(pwd)"/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
 }
 
@@ -83,11 +83,25 @@ case "$TYPE" in
 esac
 }
 
+function run_gen() {
+      echo "==> This function will create a new key with a random password"
+      echo "==> Your keys are stored at $(pwd)/keystore and your passwords in $(pwd)/passwords"
+      echo "==> Make sure you backup those folders to prevent missing keys"
+      mkdir -p keystore
+      mkdir -p passwords
+      password=$(openssl rand -hex 32)
+      cd scripts/keygen && npm i; cd - || exit
+      node scripts/keygen/index.js "$password"
+}
+
 function run() {
   echo "==> Running a node for $NETWORK configured for  $TYPE"
 case "$NETWORK" in
 "sparta")
       run_sparta
+;;
+"generate")
+      run_gen
 ;;
 *)
     echo "Unknown network, please specify sparta (for testnet)"
