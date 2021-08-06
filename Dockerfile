@@ -8,8 +8,7 @@ RUN git clone https://github.com/NethermindEth/nethermind --recursive
 WORKDIR /nethermind
 
 COPY specs/* src/Nethermind/Chains
-COPY configs/sparta/* src/Nethermind/Nethermind.Runner/configs
-#COPY configs/athene/* src/Nethermind/Nethermind.Runner/configs
+COPY configs/* src/Nethermind/Nethermind.Runner/configs
 
 RUN dotnet publish src/Nethermind/Nethermind.Runner -r linux-x64 -c release -o out
 
