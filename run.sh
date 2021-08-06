@@ -9,7 +9,6 @@ function run_sparta_simple() {
   	docker run -d \
 		-e NETHERMIND_CONFIG=sparta \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
-		-v "$(pwd)"/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
  		-v "$(pwd)"/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
@@ -26,7 +25,6 @@ function run_sparta_rpc() {
 		-e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
 		-p 8545:8545 \
 		-p 8546:8546 \
-		-v "$(pwd)"/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
  		-v "$(pwd)"/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
@@ -44,7 +42,6 @@ function run_sparta_validator() {
 		-e NETHERMIND_KEYSTORECONFIG_BLOCKAUTHORACCOUNT="$ACCOUNT" \
 		-e NETHERMIND_KEYSTORECONFIG_UNLOCKACCOUNTS="$ACCOUNT" \
 		-e NETHERMIND_KEYSTORECONFIG_PASSWORDFILES=/nethermind/passwords/"$ACCOUNT" \
-		-v "$(pwd)"/configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json \
 		-v "$(pwd)"/passwords/:/nethermind/passwords/ \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
  		-v "$(pwd)"/keystore/:/nethermind/keystore \
