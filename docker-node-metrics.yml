@@ -55,8 +55,7 @@ services:
             - NETHERMIND_METRICSCONFIG_ENABLED = true
         network_mode: host
         volumes:
-            - ./nethermind_db/:/nethermind/nethermind_db/
-            - ./keystore/:/nethermind/keystore/
+            - ./db/:/nethermind/nethermind_db/
             - ./logs/:/nethermind/logs/
 
 networks:
