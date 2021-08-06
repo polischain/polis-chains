@@ -9,11 +9,11 @@ services:
     ports:
       - '8045:8045'
     environment:
-      NETHERMIND_CONFIG: sparta
-      NETHERMIND_INITCONFIG_WEBSOCKETSENABLED: true
-      NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES: eth,subscribe,trace,txpool,web3,proof,net,parity,health
-      NETHERMIND_JSONRPCCONFIG_ENABLED: true
-      NETHERMIND_JSONRPCCONFIG_HOST: 0.0.0.0
+      NETHERMIND_CONFIG: "sparta"
+      NETHERMIND_INITCONFIG_WEBSOCKETSENABLED: "true"
+      NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES: "eth,subscribe,trace,txpool,web3,proof,net,parity,health"
+      NETHERMIND_JSONRPCCONFIG_ENABLED: "true"
+      NETHERMIND_JSONRPCCONFIG_HOST: "0.0.0.0"
     networks:
       - graph
   graph-node:
