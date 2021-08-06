@@ -9,11 +9,15 @@ contract BlockRewardAuRaCoins is BlockRewardAuRaBase, IBlockRewardAuRaCoins {
     // ============================================== Constants =======================================================
 
     /// @dev Inflation rate per staking epoch. Calculated as follows:
-    /// 2.5% annual rate * 48 staking weeks per staking year / 100 * 10**18
+    /// 10% annual rate * 52 staking weeks per staking year / 100 * 10**18
     /// This assumes that 1 staking epoch = 1 week
-    /// i.e. Inflation Rate = 2.5/48/100 * 1 ether
+    /// i.e. Inflation Rate = 10/52/100 * 1 ether
     /// Recalculate it for different annual rate and/or different staking epoch duration.
-    uint256 public constant NATIVE_COIN_INFLATION_RATE = 520833333333333;
+
+    /// Polis specific inflation rate. This assumes at least 30% of the totalSupply is being used
+    /// for validators and delegates and secures 20 years of inflation before reaching the max total
+    /// supply of 25m coins.
+    uint256 public constant NATIVE_COIN_INFLATION_RATE = 1923076923077000;
 
     // =============================================== Setters ========================================================
 
