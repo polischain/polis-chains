@@ -14,8 +14,6 @@ services:
       NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES: "eth,subscribe,trace,txpool,web3,proof,net,parity,health"
       NETHERMIND_JSONRPCCONFIG_ENABLED: "true"
       NETHERMIND_JSONRPCCONFIG_HOST: "0.0.0.0"
-    networks:
-      - graph
   graph-node:
     image: graphprotocol/graph-node
     ports:
@@ -36,8 +34,6 @@ services:
       ipfs: 'ipfs:5001'
       ethereum: 'sparta:node:8045'
       GRAPH_LOG: info
-    networks:
-      - graph
   ipfs:
     image: ipfs/go-ipfs:v0.4.23
     ports:
@@ -55,7 +51,3 @@ services:
       POSTGRES_DB: graph-node
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
-
-networks:
-  graph:
-    name: graph
