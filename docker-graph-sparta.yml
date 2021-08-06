@@ -1,5 +1,21 @@
 version: '3'
 services:
+  node:
+    image: ghcr.io/polischain/polis-chains:main
+    volumes:
+      - ./configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json
+      - ./db/:/nethermind/nethermind_db/
+      - ./logs/:/nethermind/logs/
+    ports:
+      - '8045:8045'
+    environment:
+      NETHERMIND_CONFIG: sparta
+      NETHERMIND_INITCONFIG_WEBSOCKETSENABLED: true
+      NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES: eth,subscribe,trace,txpool,web3,proof,net,parity,health
+      NETHERMIND_JSONRPCCONFIG_ENABLED: true
+      NETHERMIND_JSONRPCCONFIG_HOST: 0.0.0.0
+    networks:
+      - graph
   graph-node:
     image: graphprotocol/graph-node
     ports:
@@ -9,6 +25,7 @@ services:
       - '8030:8030'
       - '8040:8040'
     depends_on:
+      - node
       - ipfs
       - postgres
     environment:
@@ -17,8 +34,10 @@ services:
       postgres_pass: let-me-in
       postgres_db: graph-node
       ipfs: 'ipfs:5001'
-      ethereum: 'sparta:https://sparta-rpc.polis.tech'
+      ethereum: 'sparta:node:8045'
       GRAPH_LOG: info
+    networks:
+      - graph
   ipfs:
     image: ipfs/go-ipfs:v0.4.23
     ports:
@@ -36,3 +55,7 @@ services:
       POSTGRES_DB: graph-node
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
+
+networks:
+  graph:
+    name: graph
