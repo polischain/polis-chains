@@ -20,7 +20,7 @@ spec:
             - '--datadir'
             - data
           image: ghcr.io/polischain/polis-chains:main
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: sparta-node
           volumeMounts:
             - mountPath: "/nethermind/data"
