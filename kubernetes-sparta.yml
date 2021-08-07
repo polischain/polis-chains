@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sparta-node
+spec:
+  selector:
+    matchLabels:
+      app: sparta-node
+  serviceName: "sparta-node"
+  replicas: 10
+  template:
+    metadata:
+      labels:
+        app: sparta-node
+    spec:
+      containers:
+        - args:
+            - '--config'
+            - 'sparta'
+            - '--datadir'
+            - data
+          image: ghcr.io/polischain/polis-chains:main
+          imagePullPolicy: IfNotPresent
+          name: sparta-node
+          volumeMounts:
+            - mountPath: "/nethermind/data"
+              name: sparta-volume
+  volumeClaimTemplates:
+    - metadata:
+        name: sparta-volume
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 50G
+        storageClassName: do-block-storage
