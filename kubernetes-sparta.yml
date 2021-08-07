@@ -13,6 +13,18 @@ spec:
       labels:
         app: sparta-node
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - sparta-node
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - args:
             - '--config'
@@ -22,6 +34,10 @@ spec:
           image: ghcr.io/polischain/polis-chains:main
           imagePullPolicy: Always
           name: sparta-node
+          ports:
+            - containerPort: 30303
+              name: p2p
+              protocol: TCP
           volumeMounts:
             - mountPath: "/nethermind/data"
               name: sparta-volume
