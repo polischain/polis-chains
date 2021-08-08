@@ -47,6 +47,14 @@ spec:
             - 'sparta'
             - '--datadir'
             - data
+            - '--EthStats.Enabled'
+            - 'true'
+            - '--EthStats.Secret'
+            - 'erA89X5sz3mzamMePpGwUmFSCDQZWdJd2xGrFKMBSaAAmkEF6bjCt8jVnkk9p36f'
+            - '--EthStats.Server'
+            - 'wss://sparta-netstats.herokuapp.com/api'
+            - '--Init.DiscoveryEnabled'
+            - 'true'
           image: ghcr.io/polischain/polis-chains:main
           imagePullPolicy: Always
           name: sparta-node
