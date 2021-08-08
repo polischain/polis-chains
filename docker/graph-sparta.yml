@@ -43,6 +43,7 @@ services:
       GRAPH_LOG: info
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    command: [ "mix phx.server" ]
   ipfs:
     image: ipfs/go-ipfs:v0.4.23
     ports:
