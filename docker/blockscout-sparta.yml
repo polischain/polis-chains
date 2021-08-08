@@ -29,7 +29,7 @@ services:
       - node
       - postgres
     environment:
-      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/blockscout?ssl=false"
+      DATABASE_URL: "postgresql://blockscout:let-me-in@localhost:5432/blockscout?ssl=false"
       COIN: "polis"
       NETWORK: "Polis"
       SUBNETWORK: "Sparta"
