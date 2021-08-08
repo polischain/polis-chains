@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: swarm-nodes-service
   labels:
-    app: swarm-nodes-service
+    app: swarm-nodes
 spec:
   type: "NodePort"
   ports:
@@ -11,14 +11,14 @@ spec:
       port: 30303
       nodePort: 30303
       targetPort: 30303
-      name: sparta-node-tcp
+      name: swarm-node-tcp
     - protocol: UDP
       port: 30303
       nodePort: 30303
       targetPort: 30303
-      name: sparta-node-udp
+      name: swarm-node-udp
   selector:
-    app: sparta-node
+    app: swarm-nodes
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -29,7 +29,7 @@ spec:
     matchLabels:
       app: swarm-nodes
   serviceName: "swarm-nodes-service"
-  replicas: 3
+  replicas: 5
   template:
     metadata:
       labels:
@@ -63,7 +63,7 @@ spec:
             - 'wss://sparta-stats.polis.tech/api'
           image: ghcr.io/polischain/polis-chains:main
           imagePullPolicy: Always
-          name: swarm-node
+          name: swarm-nodes
           ports:
             - containerPort: 30303
               name: p2p
@@ -81,5 +81,5 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 15G
+            storage: 20G
         storageClassName: do-block-storage
