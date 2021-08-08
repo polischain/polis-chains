@@ -31,7 +31,7 @@ services:
       postgres_pass: let-me-in
       postgres_db: graph-node
       ipfs: 'ipfs:5001'
-      ethereum: 'sparta:http://127.0.0.1:8045'
+      ethereum: 'sparta:http://host.docker.internal:8545'
       GRAPH_LOG: info
   ipfs:
     image: ipfs/go-ipfs:v0.4.23
