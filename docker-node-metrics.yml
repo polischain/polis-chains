@@ -52,7 +52,7 @@ services:
         restart: unless-stopped
         environment:
             - NETHERMIND_CONFIG=sparta
-            - NETHERMIND_METRICSCONFIG_ENABLED = true
+            - NETHERMIND_METRICSCONFIG_ENABLED= true
         network_mode: host
         volumes:
             - ./db/:/nethermind/nethermind_db/

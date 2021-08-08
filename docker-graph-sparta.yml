@@ -3,7 +3,6 @@ services:
   node:
     image: ghcr.io/polischain/polis-chains:main
     volumes:
-      - ./configs/sparta/static-nodes.json:/nethermind/Data/static-nodes.json
       - ./db/:/nethermind/nethermind_db/
       - ./logs/:/nethermind/logs/
     ports:
