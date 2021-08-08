@@ -23,7 +23,7 @@ spec:
     matchLabels:
       app: sparta-node
   serviceName: "sparta-node"
-  replicas: 5
+  replicas: 20
   template:
     metadata:
       labels:
