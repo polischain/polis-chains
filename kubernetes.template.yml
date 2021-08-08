@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: NET-node
+  labels:
+    app: NET-node
+spec:
+  type: "NodePort"
+  ports:
+    - protocol: TCP
+      port: 30303
+      nodePort: 30303
+      name: NET-node-tcp
+    - protocol: UDP
+      port: 30303
+      nodePort: 30303
+      name: NET-node-udp
+  selector:
+    app: NET-node
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: NET-node
+spec:
+  selector:
+    matchLabels:
+      app: NET-node
+  serviceName: "NET-node"
+  replicas: 15
+  template:
+    metadata:
+      labels:
+        app: NET-node
+    spec:
+      containers:
+        - args:
+            - '--config'
+            - 'NET'
+            - '--datadir'
+            - data
+            - '--EthStats.Enabled'
+            - 'true'
+            - '--EthStats.Name'
+            - 'NAME'
+            - '--EthStats.Secret'
+            - 'SECRET'
+            - '--EthStats.Server'
+            - 'SERVER'
+          image: nethermind/nethermind
+          imagePullPolicy: Always
+          name: NET-node
+          ports:
+            - containerPort: 30303
+              name: p2p
+              protocol: TCP
+            - containerPort: 30303
+              name: discovery
+              protocol: UDP
+          volumeMounts:
+            - mountPath: "/nethermind/data"
+              name: NET-volume
+  volumeClaimTemplates:
+    - metadata:
+        name: NET-volume
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 15G
+        storageClassName: do-block-storage
