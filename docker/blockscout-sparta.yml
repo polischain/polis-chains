@@ -51,7 +51,7 @@ services:
       POS_STAKING_CONTRACT: "0x9eB738D4678B276F5d6B5043849502B683d2cC93"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    command: "mix do ecto.migrate && mix phx.server"
+    command: bash -c "mix do ecto.migrate && mix phx.server"
   postgres:
     image: postgres
     ports:
