@@ -10,6 +10,10 @@ function run_sparta_simple() {
   	-p 30303:30303 \
   	-p 30303:30303/udp \
 		-e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_ETHSTATSCONFIG_ENABLED="true" \
+		-e NETHERMIND_ETHSTATSCONFIG_SECRET="PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv" \
+		-e NETHERMIND_ETHSTATSCONFIG_SERVER="wss://sparta-stats.polis.tech/api" \
+		-e NETHERMIND_ETHSTATSCONFIG_NAME="$NAME" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
  		-v "$(pwd)"/logs/:/nethermind/logs/ \
@@ -34,6 +38,10 @@ function run_sparta_rpc() {
   	-p 30303:30303 \
   	-p 30303:30303/udp \
 		-e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_ETHSTATSCONFIG_ENABLED="true" \
+		-e NETHERMIND_ETHSTATSCONFIG_SECRET="PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv" \
+		-e NETHERMIND_ETHSTATSCONFIG_SERVER="wss://sparta-stats.polis.tech/api" \
+		-e NETHERMIND_ETHSTATSCONFIG_NAME="$NAME" \
 		-e NETHERMIND_INITCONFIG_WEBSOCKETSENABLED=true \
 		-e NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT=8546 \
 		-e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health \
@@ -70,6 +78,10 @@ function run_sparta_validator() {
   	-p 30303:30303 \
   	-p 30303:30303/udp \
 		-e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_ETHSTATSCONFIG_ENABLED="true" \
+		-e NETHERMIND_ETHSTATSCONFIG_SECRET="PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv" \
+		-e NETHERMIND_ETHSTATSCONFIG_SERVER="wss://sparta-stats.polis.tech/api" \
+		-e NETHERMIND_ETHSTATSCONFIG_NAME="$NAME" \
 		-e NETHERMIND_INITCONFIG_ISMINING="true" \
 		-e NETHERMIND_MININGCONFIG_ENABLED="true" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
