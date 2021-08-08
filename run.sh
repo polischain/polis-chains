@@ -8,6 +8,7 @@ function run_sparta_simple() {
     echo "==> Starting Polis node on SPARTA network"
   	docker run -d \
 		-e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_INITCONFIG_DISCOVERYENABLED="true" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
  		-v "$(pwd)"/logs/:/nethermind/logs/ \
@@ -18,6 +19,7 @@ function run_olympus_simple() {
     echo "==> Starting Polis node on OLYMPUS network"
   	docker run -d \
 		-e NETHERMIND_CONFIG=olympus \
+		-e NETHERMIND_INITCONFIG_DISCOVERYENABLED="true" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
  		-v "$(pwd)"/logs/:/nethermind/logs/ \
@@ -28,6 +30,7 @@ function run_sparta_rpc() {
   echo "==> Starting Polis node on SPARTA network and JSON RPC exposed"
   docker run -d \
 		-e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_INITCONFIG_DISCOVERYENABLED="true" \
 		-e NETHERMIND_INITCONFIG_WEBSOCKETSENABLED=true \
 		-e NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT=8546 \
 		-e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health \
@@ -44,6 +47,7 @@ function run_olympus_rpc() {
   echo "==> Starting Polis node on OLYMPUS network and JSON RPC exposed"
   docker run -d \
 		-e NETHERMIND_CONFIG=olympus \
+		-e NETHERMIND_INITCONFIG_DISCOVERYENABLED="true" \
 		-e NETHERMIND_INITCONFIG_WEBSOCKETSENABLED=true \
 		-e NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT=8546 \
 		-e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health \
@@ -61,6 +65,7 @@ function run_sparta_validator() {
 	docker run -d \
 		-p 30303:30303 \
 		-e NETHERMIND_CONFIG=sparta \
+		-e NETHERMIND_INITCONFIG_DISCOVERYENABLED="true" \
 		-e NETHERMIND_INITCONFIG_ISMINING="true" \
 		-e NETHERMIND_MININGCONFIG_ENABLED="true" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
@@ -80,6 +85,7 @@ function run_olympus_validator() {
 	docker run -d \
 		-p 30303:30303 \
 		-e NETHERMIND_CONFIG=olympus \
+		-e NETHERMIND_INITCONFIG_DISCOVERYENABLED="true" \
 		-e NETHERMIND_INITCONFIG_ISMINING="true" \
 		-e NETHERMIND_MININGCONFIG_ENABLED="true" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
