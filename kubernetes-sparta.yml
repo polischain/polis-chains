@@ -27,24 +27,12 @@ spec:
     matchLabels:
       app: sparta-node
   serviceName: "sparta-node"
-  replicas: 10
+  replicas: 15
   template:
     metadata:
       labels:
         app: sparta-node
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: "app"
-                      operator: In
-                      values:
-                        - sparta-node
-                topologyKey: "kubernetes.io/hostname"
       containers:
         - args:
             - '--config'
@@ -53,8 +41,10 @@ spec:
             - data
             - '--EthStats.Enabled'
             - 'true'
+            - '--EthStats.Name'
+            - 'Swarm'
             - '--EthStats.Secret'
-            - 'erA89X5sz3mzamMePpGwUmFSCDQZWdJd2xGrFKMBSaAAmkEF6bjCt8jVnkk9p36f'
+            - 'PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv'
             - '--EthStats.Server'
             - 'wss://sparta-stats.polis.tech/api'
           image: ghcr.io/polischain/polis-chains:main
@@ -77,5 +67,5 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 50G
+            storage: 15G
         storageClassName: do-block-storage
