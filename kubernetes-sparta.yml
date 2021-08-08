@@ -57,8 +57,6 @@ spec:
             - 'erA89X5sz3mzamMePpGwUmFSCDQZWdJd2xGrFKMBSaAAmkEF6bjCt8jVnkk9p36f'
             - '--EthStats.Server'
             - 'wss://sparta-stats.polis.tech/api'
-            - '--Init.DiscoveryEnabled'
-            - 'true'
           image: ghcr.io/polischain/polis-chains:main
           imagePullPolicy: Always
           name: sparta-node
