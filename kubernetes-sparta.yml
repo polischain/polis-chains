@@ -10,10 +10,12 @@ spec:
     - protocol: TCP
       port: 30303
       nodePort: 30303
+      targetPort: 30303
       name: sparta-node-tcp
     - protocol: UDP
       port: 30303
       nodePort: 30303
+      targetPort: 30303
       name: sparta-node-udp
   selector:
     app: sparta-node
@@ -27,12 +29,24 @@ spec:
     matchLabels:
       app: sparta-node
   serviceName: "sparta-node"
-  replicas: 15
+  replicas: 3
   template:
     metadata:
       labels:
         app: sparta-node
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                        - sparta-node
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - args:
             - '--config'
