@@ -21,6 +21,7 @@ WORKDIR /nethermind
 COPY --from=build /nethermind/out .
 
 EXPOSE 30303
+EXPOSE 30303/udp
 EXPOSE 8545
 
 VOLUME /nethermind/nethermind_db
