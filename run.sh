@@ -6,7 +6,7 @@ ACCOUNT=$3
 
 function run_sparta_simple() {
     echo "==> Starting Polis node on SPARTA network"
-  	docker run -d \
+  	docker run -d --restart=always \
   	-p 30303:30303 \
   	-p 30303:30303/udp \
 		-e NETHERMIND_CONFIG=sparta \
@@ -23,7 +23,7 @@ function run_sparta_simple() {
 
 function run_olympus_simple() {
     echo "==> Starting Polis node on OLYMPUS network"
-  	docker run -d \
+  	docker run -d --restart=always \
   	-p 30303:30303 \
   	-p 30303:30303/udp \
 		-e NETHERMIND_CONFIG=olympus \
@@ -36,7 +36,7 @@ function run_olympus_simple() {
 
 function run_sparta_rpc() {
   echo "==> Starting Polis node on SPARTA network and JSON RPC exposed"
-  docker run -d \
+  docker run -d --restart=always \
   	-p 30303:30303 \
   	-p 30303:30303/udp \
 		-e NETHERMIND_CONFIG=sparta \
@@ -59,7 +59,7 @@ function run_sparta_rpc() {
 
 function run_olympus_rpc() {
   echo "==> Starting Polis node on OLYMPUS network and JSON RPC exposed"
-  docker run -d \
+  docker run -d --restart=always \
   	-p 30303:30303 \
   	-p 30303:30303/udp \
 		-e NETHERMIND_CONFIG=olympus \
@@ -78,7 +78,7 @@ function run_olympus_rpc() {
 
 function run_sparta_validator() {
   echo "==> Starting Polis node on SPARTA network and enabled for mining"
-	docker run -d \
+	docker run -d --restart=always \
   	-p 30303:30303 \
   	-p 30303:30303/udp \
 		-e NETHERMIND_CONFIG=sparta \
@@ -102,7 +102,7 @@ function run_sparta_validator() {
 
 function run_olympus_validator() {
   echo "==> Starting Polis node on OLYMPUS network and enabled for mining"
-	docker run -d \
+	docker run -d --restart=always \
   	-p 30303:30303 \
   	-p 30303:30303/udp \
 		-e NETHERMIND_CONFIG=olympus \
