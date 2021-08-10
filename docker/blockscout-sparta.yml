@@ -5,6 +5,7 @@ services:
     volumes:
       - ./db/:/nethermind/nethermind_db/
       - ./logs/:/nethermind/logs/
+      - ./keystore/:/nethermind/keystore/
     ports:
       - '30303:30303/udp'
       - '30303:30303'

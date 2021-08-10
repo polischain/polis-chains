@@ -16,6 +16,7 @@ function run_sparta_simple() {
 		-e NETHERMIND_ETHSTATSCONFIG_NAME="$NAME" \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
+ 		-v "$(pwd)"/keystore/:/nethermind/keystore/ \
  		-v "$(pwd)"/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
 }
@@ -28,6 +29,7 @@ function run_olympus_simple() {
 		-e NETHERMIND_CONFIG=olympus \
 		-e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
+ 		-v "$(pwd)"/keystore/:/nethermind/keystore/ \
  		-v "$(pwd)"/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
 }
@@ -50,6 +52,7 @@ function run_sparta_rpc() {
 		-p 8545:8545 \
 		-p 8546:8546 \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
+ 		-v "$(pwd)"/keystore/:/nethermind/keystore/ \
  		-v "$(pwd)"/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
 }
@@ -68,6 +71,7 @@ function run_olympus_rpc() {
 		-p 8545:8545 \
 		-p 8546:8546 \
  		-v "$(pwd)"/db/:/nethermind/nethermind_db/ \
+ 		-v "$(pwd)"/keystore/:/nethermind/keystore/ \
  		-v "$(pwd)"/logs/:/nethermind/logs/ \
  		ghcr.io/polischain/polis-chains:main
 }
