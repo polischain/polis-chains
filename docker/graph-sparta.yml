@@ -32,7 +32,7 @@ services:
       --jsonrpc-cors=all
       --jsonrpc-interface=all
       --jsonrpc-hosts=all
-      --jsonrpc-apis=web3,eth,net,parity,trace,admin
+      --jsonrpc-apis=web3,eth,net,parity,traces,admin
       --logging="engine=trace,miner=trace"
     volumes:
       - ./node_data:/root/data
