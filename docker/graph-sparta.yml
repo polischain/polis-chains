@@ -40,7 +40,7 @@ services:
       postgres_pass: let-me-in
       postgres_db: graph-node
       ipfs: 'ipfs:5001'
-      ethereum: 'sparta:https://sparta-rpc.polis.tech'
+      ethereum: 'sparta:http://host.docker.internal:8545'
       GRAPH_LOG: info
     extra_hosts:
       - "host.docker.internal:host-gateway"
