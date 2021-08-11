@@ -46,7 +46,7 @@ function run_sparta_rpc() {
     -e NETHERMIND_ETHSTATSCONFIG_NAME="$NAME" \
     -e NETHERMIND_INITCONFIG_WEBSOCKETSENABLED=true \
     -e NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT=8546 \
-    -e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health \
+    -e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health,admin \
     -e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
     -e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
     -p 8545:8545 \
@@ -65,7 +65,7 @@ function run_olympus_rpc() {
     -e NETHERMIND_CONFIG=olympus \
     -e NETHERMIND_INITCONFIG_WEBSOCKETSENABLED=true \
     -e NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT=8546 \
-    -e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health \
+    -e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health,admin \
     -e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
     -e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
     -p 8545:8545 \
