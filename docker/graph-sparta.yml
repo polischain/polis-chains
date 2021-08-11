@@ -19,7 +19,7 @@ services:
       NETHERMIND_ETHSTATSCONFIG_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
       NETHERMIND_ETHSTATSCONFIG_SERVER: "wss://sparta-stats.polis.tech/api"
       NETHERMIND_ETHSTATSCONFIG_NAME: "Graph Node"
-      NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES: "eth,subscribe,trace,txpool,web3,proof,net,parity,health"
+      NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES: "eth,subscribe,trace,txpool,web3,proof,net,parity,health,admin"
       NETHERMIND_JSONRPCCONFIG_ENABLED: "true"
       NETHERMIND_JSONRPCCONFIG_HOST: "0.0.0.0"
   graph-node:
