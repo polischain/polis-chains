@@ -7,14 +7,8 @@ ACCOUNT=$3
 function run_sparta_simple() {
   echo "==> Starting Polis node on SPARTA network"
   docker run -d --restart=always \
-    -p 8545:8545 \
     -p 30303:30303 \
     -p 30303:30303/udp \
-    -e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
-    -e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
-    -e NETHERMIND_HEALTHCHECKSCONFIG_ENABLED="true" \
-    -e NETHERMIND_HEALTHCHECKSCONFIG_WEBHOOKSENABLED="true" \
-    -e NETHERMIND_HEALTHCHECKSCONFIG_UIENABLED="true" \
     -e NETHERMIND_CONFIG=sparta \
     -e NETHERMIND_ETHSTATSCONFIG_ENABLED="true" \
     -e NETHERMIND_ETHSTATSCONFIG_SECRET="PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv" \
