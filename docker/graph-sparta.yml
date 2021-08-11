@@ -24,7 +24,6 @@ services:
     user: root
     command:
       --chain=sparta
-      --nat="extip:$EXT_IP"
       --base-path=/root/data
       --max-peers=100
       --tx-time-limit=1000
