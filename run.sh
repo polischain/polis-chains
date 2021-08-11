@@ -9,6 +9,7 @@ function run_sparta_simple() {
   docker run -d --restart=always \
     -p 30303:30303 \
     -p 30303:30303/udp \
+    -e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
     -e NETHERMIND_HEALTHCHECKSCONFIG_ENABLED="true" \
     -e NETHERMIND_HEALTHCHECKSCONFIG_WEBHOOKSENABLED="true" \
     -e NETHERMIND_HEALTHCHECKSCONFIG_UIENABLED="true" \
