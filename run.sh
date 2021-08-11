@@ -7,6 +7,7 @@ ACCOUNT=$3
 function run_sparta_simple() {
   echo "==> Starting Polis node on SPARTA network"
   docker run -d --restart=always \
+    -p 8545:8545 \
     -p 30303:30303 \
     -p 30303:30303/udp \
     -e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
