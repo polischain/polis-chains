@@ -15,3 +15,6 @@ keystore/
 passwords/
 logs/
 db/
+
+#Mac
+.DS_Store
