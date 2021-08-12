@@ -189,8 +189,8 @@ function run_gen() {
       mkdir -p keystore
       mkdir -p passwords
       password=$(openssl rand -hex 32)
-      cd scripts/keygen && npm i; cd - || exit
-      node scripts/keygen/index.js "$password"
+      cd keygen && npm i; cd - || exit
+      node keygen/index.js "$password"
 }
 
 function run() {

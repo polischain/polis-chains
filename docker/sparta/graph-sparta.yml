@@ -20,28 +20,30 @@ services:
   node:
     init: true
     container_name: node
-    image: ghcr.io/polischain/openethereum:main
-    user: root
-    command:
-      --chain=sparta
-      --base-path=/root/data
-      --max-peers=100
-      --tx-time-limit=1000
-      --jsonrpc-port=8545
-      --jsonrpc-cors=all
-      --jsonrpc-interface=all
-      --jsonrpc-hosts=all
-      --jsonrpc-apis=web3,eth,net,parity,traces
+    image: ghcr.io/polischain/polis-chains:main
     volumes:
-      - ./node_data:/root/data
+      - ./db/:/nethermind/nethermind_db/
+      - ./logs/:/nethermind/logs/
+      - ./keystore/:/nethermind/keystore/
     expose:
       - "8545"
     ports:
-      - "8545:8545"
-      - "30303:30303"
-      - "30303:30303/udp"
+      - '30303:30303/udp'
+        - '30303:30303'
+        - '8545:8545'
+        - '8546:8546'
+    environment:
+      NETHERMIND_CONFIG: "sparta"
+      NETHERMIND_INITCONFIG_WEBSOCKETSENABLED: "true"
+      NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT: "8546"
+      NETHERMIND_ETHSTATSCONFIG_ENABLED: "true"
+      NETHERMIND_ETHSTATSCONFIG_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
+      NETHERMIND_ETHSTATSCONFIG_SERVER: "wss://sparta-stats.polis.tech/api"
+      NETHERMIND_ETHSTATSCONFIG_NAME: "Graph Node"
+      NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES: "eth,subscribe,trace,txpool,web3,proof,net,parity,health,admin"
+      NETHERMIND_JSONRPCCONFIG_ENABLED: "true"
+      NETHERMIND_JSONRPCCONFIG_HOST: "0.0.0.0"
     restart: always
-
   graph-node:
     image: graphprotocol/graph-node
     ports:
