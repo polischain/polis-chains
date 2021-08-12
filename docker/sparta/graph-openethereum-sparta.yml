@@ -34,7 +34,7 @@ services:
       --jsonrpc-interface=all
       --jsonrpc-hosts=all
       --jsonrpc-apis=web3,eth,net,parity,traces
-      --fatdb="on"
+      --fat-db="on"
       --tracing="on"
     volumes:
       - ./node_data:/root/data
