@@ -110,6 +110,12 @@ case "$TYPE" in
   bash scripts/docker.sh &> /dev/null
   run_sparta_simple
 ;;
+"node_archived")
+  echo "==> Running a simple node for SPARTA"
+  echo "==> Checking docker installation..."
+  bash scripts/docker.sh &> /dev/null
+  run_sparta_simple_archived
+;;
 *)
     echo "Unknown configuration type for SPARTA please specify a node setup: rpc, explorer, validator, node"
     ;;
