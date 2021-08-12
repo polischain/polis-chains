@@ -1,22 +1,5 @@
 version: '3.7'
 services:
-  node-agent:
-    init: true
-    container_name: node-agent
-    image: xdaichain/ethstats-agent:latest
-    links:
-      - "node"
-    depends_on:
-      - "node"
-    environment:
-      NODE_ENV: production
-      RPC_HOST: node
-      RPC_PORT: 8545
-      LISTENING_PORT: 30303
-      INSTANCE_NAME: "Graph Node"
-      WS_SERVER: "wss://sparta-stats.polis.tech/api"
-      WS_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
-      VERBOSITY: 1
   node:
     init: true
     container_name: node
