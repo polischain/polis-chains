@@ -13,7 +13,7 @@ services:
       RPC_HOST: node
       RPC_PORT: 8545
       LISTENING_PORT: 30303
-      INSTANCE_NAME: "Graph Node"
+      INSTANCE_NAME: "Blockscout Node"
       WS_SERVER: "wss://sparta-stats.polis.tech/api"
       WS_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
       VERBOSITY: 1
