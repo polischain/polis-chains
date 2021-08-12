@@ -41,7 +41,7 @@ services:
       - "30303:30303"
       - "30303:30303/udp"
     restart: always
-    
+
   graph-node:
     image: graphprotocol/graph-node
     ports:
@@ -60,7 +60,7 @@ services:
       postgres_pass: let-me-in
       postgres_db: graph-node
       ipfs: 'ipfs:5001'
-      ethereum: 'mainnet:http://host.docker.internal:8545'
+      ethereum: 'sparta:http://host.docker.internal:8545'
       GRAPH_LOG: debug
     extra_hosts:
       - "host.docker.internal:host-gateway"
