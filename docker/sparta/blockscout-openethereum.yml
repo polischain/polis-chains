@@ -25,7 +25,6 @@ services:
     command:
       --chain=sparta
       --base-path=/root/data
-      --pruning=archive
       --max-peers=100
       --jsonrpc-interface all
       --jsonrpc-apis web3,eth,net,parity,pubsub,traces
