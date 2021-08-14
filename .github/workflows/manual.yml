@@ -1,0 +1,13 @@
+name: Update configs
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  update-block:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Update block
+      run: "./scripts/update_blocks.sh"
