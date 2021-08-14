@@ -19,16 +19,16 @@ async function main() {
 
     console.log("\n Deploying Contracts \n")
 
-    const ValidatorSetAuRa = await ethers.getContractFactory("contracts/ValidatorSetAuRa.sol:ValidatorSetAuRa");
-    const BlockRewardAuRa = await ethers.getContractFactory("contracts/BlockRewardAuRa.sol:BlockRewardAuRa");
-    const RandomAuRa = await ethers.getContractFactory("contracts/RandomAuRa.sol:RandomAuRa");
-    const StakingAuRa = await ethers.getContractFactory("contracts/StakingAuRa.sol:StakingAuRa");
-    const Governance = await ethers.getContractFactory("contracts/Governance.sol:Governance");
-    const TxPermission = await ethers.getContractFactory("contracts/TxPermission.sol:TxPermission");
-    const Certifier = await ethers.getContractFactory("contracts/Certifier.sol:Certifier");
-    const Registry = await ethers.getContractFactory("contracts/Registry.sol:Registry");
+    const ValidatorSetAuRa = await ethers.getContractFactory("contracts/posdao/ValidatorSetAuRa.sol:ValidatorSetAuRa");
+    const BlockRewardAuRa = await ethers.getContractFactory("contracts/posdao/BlockRewardAuRa.sol:BlockRewardAuRa");
+    const RandomAuRa = await ethers.getContractFactory("contracts/posdao/RandomAuRa.sol:RandomAuRa");
+    const StakingAuRa = await ethers.getContractFactory("contracts/posdao/StakingAuRa.sol:StakingAuRa");
+    const Governance = await ethers.getContractFactory("contracts/posdao/Governance.sol:Governance");
+    const TxPermission = await ethers.getContractFactory("contracts/posdao/TxPermission.sol:TxPermission");
+    const Certifier = await ethers.getContractFactory("contracts/posdao/Certifier.sol:Certifier");
+    const Registry = await ethers.getContractFactory("contracts/posdao/Registry.sol:Registry");
 
-    const Proxy = await ethers.getContractFactory("contracts/upgradeability/AdminUpgradeabilityProxy.sol:AdminUpgradeabilityProxy");
+    const Proxy = await ethers.getContractFactory("contracts/posdao/upgradeability/AdminUpgradeabilityProxy.sol:AdminUpgradeabilityProxy");
 
     console.log("Deploying ValidatorSetAuRa")
     let validatorSet = await ValidatorSetAuRa.deploy()
