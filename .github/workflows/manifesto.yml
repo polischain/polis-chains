@@ -1,4 +1,4 @@
-name: Compile DAO Manifesto
+name:  Manifesto
 
 on:
   push:
