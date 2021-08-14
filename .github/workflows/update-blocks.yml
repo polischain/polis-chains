@@ -1,6 +1,7 @@
 name: Update configs
 
 on:
+  push:
   schedule:
     - cron: "*/5 * * * *"
 
