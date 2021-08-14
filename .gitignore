@@ -16,5 +16,13 @@ passwords/
 logs/
 db/
 
-#Mac
+# Mac
 .DS_Store
+
+# LateX
+manifesto/*.aux
+manifesto/*.fdb_latexmk
+manifesto/*.fls
+manifesto/*.log
+manifesto/*.out
+manifesto/*.toc
