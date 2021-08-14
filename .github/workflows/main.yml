@@ -1,0 +1,16 @@
+name: Compile DAO Manifesto
+
+on:
+  push:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Latex
+        uses: fudan-mse/latex-action@v0.0.1
+        with:
+          root_file: manifesto/manifesto.text
