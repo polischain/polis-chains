@@ -1,6 +1,6 @@
 pragma solidity 0.5.10;
 
-import "../../contracts/ERC677BridgeTokenRewardable.sol";
+import "../ERC677BridgeTokenRewardable.sol";
 
 
 contract ERC677BridgeTokenRewardableMock is ERC677BridgeTokenRewardable {

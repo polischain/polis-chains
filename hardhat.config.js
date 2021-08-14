@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
+
 require('dotenv').config()
 
 let private_key = process.env.PRIVATE_KEY;
@@ -27,8 +28,16 @@ module.exports = {
                     enabled: true,
                     runs: 200
                 }
-            }
-        }, ]
+            },
+        }, {
+            version: "0.8.7",
+            settings: {
+                optimizer: {
+                    enabled: true,
+                    runs: 200
+                }
+            },
+        }, ],
     },
     mocha: {
         timeout: 2000000

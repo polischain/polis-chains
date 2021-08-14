@@ -1,6 +1,6 @@
 pragma solidity 0.5.10;
 
-import '../../contracts/RandomAuRa.sol';
+import "../RandomAuRa.sol";
 
 
 contract RandomAuRaMock is RandomAuRa {
