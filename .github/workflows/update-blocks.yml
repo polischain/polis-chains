@@ -11,3 +11,11 @@ jobs:
     steps:
     - name: Update block
       run: "./scripts/update_blocks.sh"
+      
+    - name: Commit changes
+    - uses: EndBug/add-and-commit@v7
+      with:
+        message: 'Update blocks'
+
+      
+
