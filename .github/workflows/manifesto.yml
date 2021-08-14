@@ -13,4 +13,5 @@ jobs:
       - name: Build Latex
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: manifesto/manifesto.tex
+          root_file: manifesto.tex
+          working_directory: ./manifesto/
