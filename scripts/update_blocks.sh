@@ -22,13 +22,13 @@ function fetch_last_block() {
 }
 
 function update_sparta() {
-  sed -i "" 's/\"PivotNumber\":.*/\"PivotNumber\": '"$BLOCK_NUMBER"',/g' "./specs/configs/sparta.cfg"
-  sed -i "" 's/\"PivotHash\":.*/\"PivotHash\": "'"$BLOCK_HASH"'",/g' "./specs/configs/sparta.cfg"
-  sed -i "" 's/\"PivotTotalDifficulty\":.*/\"PivotTotalDifficulty\": "'"$BLOCK_TOTAL_DIFFICULTY"'",/g' "./specs/configs/sparta.cfg"
+  sed -i 's/\"PivotNumber\":.*/\"PivotNumber\": '"$BLOCK_NUMBER"',/g' "./specs/configs/sparta.cfg"
+  sed -i 's/\"PivotHash\":.*/\"PivotHash\": "'"$BLOCK_HASH"'",/g' "./specs/configs/sparta.cfg"
+  sed -i 's/\"PivotTotalDifficulty\":.*/\"PivotTotalDifficulty\": "'"$BLOCK_TOTAL_DIFFICULTY"'",/g' "./specs/configs/sparta.cfg"
 
-  sed -i "" 's/\"PivotNumber\":.*/\"PivotNumber\": '"$BLOCK_NUMBER"',/g' "./specs/configs/sparta_validator.cfg"
-  sed -i "" 's/\"PivotHash\":.*/\"PivotHash\": "'"$BLOCK_HASH"'",/g' "./specs/configs/sparta_validator.cfg"
-  sed -i "" 's/\"PivotTotalDifficulty\":.*/\"PivotTotalDifficulty\": "'"$BLOCK_TOTAL_DIFFICULTY"'",/g' "./specs/configs/sparta_validator.cfg"
+  sed -i 's/\"PivotNumber\":.*/\"PivotNumber\": '"$BLOCK_NUMBER"',/g' "./specs/configs/sparta_validator.cfg"
+  sed -i 's/\"PivotHash\":.*/\"PivotHash\": "'"$BLOCK_HASH"'",/g' "./specs/configs/sparta_validator.cfg"
+  sed -i 's/\"PivotTotalDifficulty\":.*/\"PivotTotalDifficulty\": "'"$BLOCK_TOTAL_DIFFICULTY"'",/g' "./specs/configs/sparta_validator.cfg"
 }
 
 function fetch_sparta() {
