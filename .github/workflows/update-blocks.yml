@@ -14,13 +14,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
         
-    - name: Update block
-      run: "./scripts/update_blocks.sh"
+    - name: Update block for Sparta
+      run: "./scripts/update_blocks.sh sparta"
       
     - name: Commit changes
       uses: EndBug/add-and-commit@v7
       with:
         message: 'Update blocks'
-        cwd: './polis-chains/'
-
 
