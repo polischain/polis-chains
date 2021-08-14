@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+        
     - name: Update block
       run: "./scripts/update_blocks.sh"
       
