@@ -117,7 +117,7 @@ case "$TYPE" in
   run_sparta_simple_archived
 ;;
 *)
-    echo "Unknown configuration type for SPARTA please specify a node setup: rpc, explorer, validator, node"
+echo "Unknown configuration type for SPARTA please specify a node setup: rpc, explorer, validator, node"
     ;;
 esac
 }
