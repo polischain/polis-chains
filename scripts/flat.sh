@@ -14,14 +14,12 @@ DAO_FULLPATH="$ROOT""$DAO"
 
 FLAT=contracts/flat/
 
-FULLPATH="$(cd "$(dirname "$1")" || exit; pwd -P)/$(basename "$1")"
-
 iterate_sources() {
-    for FILE in "$FULLPATH""$1"*.sol; do
-        [ -f "$FILE" ] || break
-        echo "$FILE"
-        ./node_modules/.bin/poa-solidity-flattener "$FILE" "$2"
-    done
+  files=$(ls "$1"*.sol)
+  for file in $files; do
+    file_name=$(basename "$file")
+    hardhat flatten "$file" > "$2""$file_name"
+  done
 }
 
 mkdir -p "$FLAT""$POSDAO";
