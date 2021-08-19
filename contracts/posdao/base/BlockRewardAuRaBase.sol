@@ -107,6 +107,19 @@ contract BlockRewardAuRaBase is UpgradeableOwned, IBlockRewardAuRa {
     // Reserved storage slots to allow for layout changes in the future.
     uint256[25] private ______gapForPublic;
 
+
+    // ============ POLIS MODIFICATIONS: STARTS =============== //
+
+    // Agora address receives AGORA_REWARD_PERCENTAGE of the block rewards for a community treasury.
+    address public AGORA_ADDRESS;
+
+    // Agora percentage reward to the community treasury.
+    uint256 public AGORA_REWARD_PERCENTAGE = 20;
+
+    // ============ POLIS MODIFICATIONS: END =============== //
+
+
+
     // ================================================ Events ========================================================
 
     /// @dev Emitted by the `addExtraReceiver` function.
@@ -215,14 +228,25 @@ contract BlockRewardAuRaBase is UpgradeableOwned, IBlockRewardAuRa {
     /// @param _validatorSet The address of the `ValidatorSetAuRa` contract.
     /// @param _prevBlockReward The address of the previous BlockReward contract
     /// (for statistics migration purposes).
-    function initialize(address _validatorSet, address _prevBlockReward) external {
+
+    // ============ POLIS MODIFICATIONS: STARTS =============== //
+
+    // Polis initialization requires an extra param for the agora address;
+    /// @param _agora The the address that will receive the specified percentage
+
+    function initialize(address _validatorSet, address _prevBlockReward, address _agora) external {
         require(_getCurrentBlockNumber() == 0 || msg.sender == _admin());
         require(!isInitialized());
         require(_validatorSet != address(0));
+        require(_agora != address(0));
+        AGORA_ADDRESS = _agora;
         validatorSetContract = IValidatorSetAuRa(_validatorSet);
         validatorMinRewardPercent[0] = VALIDATOR_MIN_REWARD_PERCENT;
         _prevBlockRewardContract = IBlockRewardAuRa(_prevBlockReward);
+
     }
+
+    // ============ POLIS MODIFICATIONS: END =============== //
 
     /// @dev Called by the validator's node when producing and closing a block,
     /// see https://openethereum.github.io/Block-Reward-Contract.html.
@@ -636,7 +660,12 @@ contract BlockRewardAuRaBase is UpgradeableOwned, IBlockRewardAuRa {
 
     // ============================================== Internal ========================================================
 
+    // ============ POLIS MODIFICATIONS: START =============== //
+
+    // Polis changes the minimum reward for validators to 50%
     uint256 internal constant VALIDATOR_MIN_REWARD_PERCENT = 50; // 50%
+    // ============ POLIS MODIFICATIONS: END =============== //
+
     uint256 internal constant REWARD_PERCENT_MULTIPLIER = 1000000;
 
     function _coinInflationAmount(uint256, uint256[] memory) internal view returns(uint256);

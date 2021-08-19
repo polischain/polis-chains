@@ -2,7 +2,7 @@ pragma solidity 0.5.10;
 
 import "./BlockRewardAuRaBase.sol";
 import "../interfaces/IBlockRewardAuRaCoins.sol";
-
+import "../interfaces/IAgora.sol";
 
 contract BlockRewardAuRaCoins is BlockRewardAuRaBase, IBlockRewardAuRaCoins {
 
@@ -14,10 +14,16 @@ contract BlockRewardAuRaCoins is BlockRewardAuRaBase, IBlockRewardAuRaCoins {
     /// i.e. Inflation Rate = 10/52/100 * 1 ether
     /// Recalculate it for different annual rate and/or different staking epoch duration.
 
+    // ============ POLIS MODIFICATIONS: START =============== //
+
     /// Polis specific inflation rate. This assumes at least 30% of the totalSupply is being used
     /// for validators and delegates and secures 20 years of inflation before reaching the max total
     /// supply of 25m coins.
+
     uint256 public constant NATIVE_COIN_INFLATION_RATE = 1923076923077000;
+
+    // ============ POLIS MODIFICATIONS: END =============== //
+
 
     // =============================================== Setters ========================================================
 
@@ -25,9 +31,20 @@ contract BlockRewardAuRaCoins is BlockRewardAuRaBase, IBlockRewardAuRaCoins {
     /// from the balance of the `BlockRewardAuRa` contract to the specified address as a reward.
     /// @param _nativeCoins The amount of native coins to transfer as a reward.
     /// @param _to The target address to transfer the amounts to.
+
+    // ============ POLIS MODIFICATIONS: START =============== //
+    // Polis modification for the transferReward funtion to pay the Agora before paying the user.
+    // The contract will call the Agora.deposit() function with the 20% of the amount specified
+    //  in the _nativeCoins param and reduce the amount passed to _transferNativeReward by 20%
+
     function transferReward(uint256 _nativeCoins, address payable _to) external onlyStakingContract {
-        _transferNativeReward(_nativeCoins, _to);
+        uint256 agora_reward = _nativeCoins.mul(80).div(100);
+        IAgora(AGORA_ADDRESS).deposit.value(agora_reward)();
+        uint256 native_coin_reward = _nativeCoins - agora_reward;
+        _transferNativeReward(native_coin_reward, _to);
     }
+
+    // ============ POLIS MODIFICATIONS: END =============== //
 
     // =============================================== Getters ========================================================
 
@@ -53,6 +70,7 @@ contract BlockRewardAuRaCoins is BlockRewardAuRaBase, IBlockRewardAuRaCoins {
             totalStake,
             epochPoolNativeReward[_stakingEpoch][_poolId]
         );
+
     }
 
     /// @dev Returns the reward amount in native coins for
