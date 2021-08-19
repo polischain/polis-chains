@@ -12,10 +12,12 @@
 // uints are changed to uint256s for simplicity and safety.
 // modified to match solidity compiler requirements
 
-pragma solidity 0.8.7;
+pragma solidity 0.7.6;
 
+import "./SafeMath.sol";
 
 contract Timelock {
+    using SafeMath for uint256;
 
     /// @notice An event emitted when the timelock admin changes
     event NewAdmin(address indexed newAdmin);
@@ -99,7 +101,7 @@ contract Timelock {
 
     function queueTransaction(address target, uint256 value, string memory signature, bytes memory data, uint256 eta) public returns (bytes32) {
         require(msg.sender == admin, "Timelock::queueTransaction: Call must come from admin.");
-        require(eta >= block.timestamp + (delay), "Timelock::queueTransaction: Estimated execution block must satisfy delay.");
+        require(eta >= block.timestamp.add(delay), "Timelock::queueTransaction: Estimated execution block must satisfy delay.");
 
         bytes32 txHash = keccak256(abi.encode(target, value, signature, data, eta));
         queuedTransactions[txHash] = true;
@@ -123,7 +125,7 @@ contract Timelock {
         bytes32 txHash = keccak256(abi.encode(target, value, signature, data, eta));
         require(queuedTransactions[txHash], "Timelock::executeTransaction: Transaction hasn't been queued.");
         require(block.timestamp >= eta, "Timelock::executeTransaction: Transaction hasn't surpassed time lock.");
-        require(block.timestamp <= eta + (GRACE_PERIOD), "Timelock::executeTransaction: Transaction is stale.");
+        require(block.timestamp <= eta.add(GRACE_PERIOD), "Timelock::executeTransaction: Transaction is stale.");
 
         queuedTransactions[txHash] = false;
 

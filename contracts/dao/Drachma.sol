@@ -1,11 +1,26 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.7;
+pragma solidity 0.7.6;
 
-import "./utils/Ownable.sol";
-import "./ERC20.sol";
+import "./SafeMath.sol";
+import "./Context.sol";
+import "./Ownable.sol";
 
-contract GovToken is ERC20("GovToken", "gTOKEN"), Ownable {
+// Drachma is a token used for Governance. It is minted by Plutus when DRACHMAS are deposited, and they cannot be transfered.
+contract Drachma is Ownable {
+    using SafeMath for uint256;
+
+    // ** ERC20 variables ** //
+
+    mapping (address => uint256) private _balances;
+
+    uint256 private _totalSupply;
+
+    string private constant _name = "Staked Polis";
+    string private constant _symbol = "DRACHMA";
+    uint8 private constant _decimals = 18;
+
+    // ** Governance variables ** //
 
     /// @dev A record of each accounts delegate
     mapping(address => address) internal _delegates;
@@ -56,14 +71,35 @@ contract GovToken is ERC20("GovToken", "gTOKEN"), Ownable {
     );
     event Burned(address indexed burner, uint256 burnAmount);
 
+    /**
+     * @dev Emitted when `value` tokens are moved from one account (`from`) to
+     * another (`to`).
+     *
+     * Note that `value` may be zero.
+     */
+    event Transfer(address indexed from, address indexed to, uint256 value);
+
+    /**
+    * @dev Sets the values for {name} and {symbol}, initializes {decimals} with
+    * a default value of 18.
+    *
+    * To select a different value for {decimals}, use {_setupDecimals}.
+    *
+    * All three of these values are immutable: they can only be set once during
+    * construction.
+    */
+    constructor () {
+    }
+
+
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
         emit Minted(owner(), _to, _amount);
     }
 
-    function burn(uint256 _amount) public {
-        _burn(msg.sender, _amount);
-        emit Burned(msg.sender, _amount);
+    function burn(address _to, uint256 _amount) public onlyOwner{
+        _burn(_to, _amount);
+        emit Burned(_to, _amount);
     }
 
     /**
@@ -210,7 +246,7 @@ contract GovToken is ERC20("GovToken", "gTOKEN"), Ownable {
                 uint256 srcRepOld = srcRepNum > 0
                 ? checkpoints[srcRep][srcRepNum - 1].votes
                 : 0;
-                uint256 srcRepNew = srcRepOld - amount;
+                uint256 srcRepNew = srcRepOld.sub(amount);
                 _writeCheckpoint(srcRep, srcRepNum, srcRepOld, srcRepNew);
             }
 
@@ -220,7 +256,7 @@ contract GovToken is ERC20("GovToken", "gTOKEN"), Ownable {
                 uint256 dstRepOld = dstRepNum > 0
                 ? checkpoints[dstRep][dstRepNum - 1].votes
                 : 0;
-                uint256 dstRepNew = dstRepOld + (amount);
+                uint256 dstRepNew = dstRepOld.add(amount);
                 _writeCheckpoint(dstRep, dstRepNum, dstRepOld, dstRepNew);
             }
         }
@@ -250,7 +286,7 @@ contract GovToken is ERC20("GovToken", "gTOKEN"), Ownable {
         emit DelegateVotesChanged(delegatee, oldVotes, newVotes);
     }
 
-    function getChainId() internal view returns (uint256) {
+    function getChainId() internal pure returns (uint256) {
         uint256 chainId;
         assembly {
             chainId := chainid()
@@ -262,7 +298,95 @@ contract GovToken is ERC20("GovToken", "gTOKEN"), Ownable {
         address from,
         address to,
         uint256 amount
-    ) internal virtual override (ERC20) {
+    ) internal virtual {
         _moveDelegates(_delegates[from], _delegates[to], amount);
+    }
+
+    // Some ERC20 functions
+
+    /**
+     * @dev Returns the name of the token.
+     */
+    function name() public view virtual returns (string memory) {
+        return _name;
+    }
+
+    /**
+     * @dev Returns the symbol of the token, usually a shorter version of the
+     * name.
+     */
+    function symbol() public view virtual returns (string memory) {
+        return _symbol;
+    }
+
+    /**
+     * @dev Returns the number of decimals used to get its user representation.
+     * For example, if `decimals` equals `2`, a balance of `505` tokens should
+     * be displayed to a user as `5,05` (`505 / 10 ** 2`).
+     *
+     * Tokens usually opt for a value of 18, imitating the relationship between
+     * Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is
+     * called.
+     *
+     * NOTE: This information is only used for _display_ purposes: it in
+     * no way affects any of the arithmetic of the contract, including
+     * {IERC20-balanceOf} and {IERC20-transfer}.
+     */
+    function decimals() public view virtual returns (uint8) {
+        return _decimals;
+    }
+
+    /**
+     * @dev See {IERC20-totalSupply}.
+     */
+    function totalSupply() public view virtual returns (uint256) {
+        return _totalSupply;
+    }
+
+    /**
+     * @dev See {IERC20-balanceOf}.
+     */
+    function balanceOf(address account) public view virtual returns (uint256) {
+        return _balances[account];
+    }
+
+    /** @dev Creates `amount` tokens and assigns them to `account`, increasing
+     * the total supply.
+     *
+     * Emits a {Transfer} event with `from` set to the zero address.
+     *
+     * Requirements:
+     *
+     * - `to` cannot be the zero address.
+     */
+    function _mint(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: mint to the zero address");
+
+        _beforeTokenTransfer(address(0), account, amount);
+
+        _totalSupply = _totalSupply.add(amount);
+        _balances[account] = _balances[account].add(amount);
+        emit Transfer(address(0), account, amount);
+    }
+
+    /**
+     * @dev Destroys `amount` tokens from `account`, reducing the
+     * total supply.
+     *
+     * Emits a {Transfer} event with `to` set to the zero address.
+     *
+     * Requirements:
+     *
+     * - `account` cannot be the zero address.
+     * - `account` must have at least `amount` tokens.
+     */
+    function _burn(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: burn from the zero address");
+
+        _beforeTokenTransfer(account, address(0), amount);
+
+        _balances[account] = _balances[account].sub(amount, "ERC20: burn amount exceeds balance");
+        _totalSupply = _totalSupply.sub(amount);
+        emit Transfer(account, address(0), amount);
     }
 }

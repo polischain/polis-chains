@@ -1,34 +1,30 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.7;
+pragma solidity 0.7.6;
 
-import "./interfaces/IERC20.sol";
-import "./utils/Ownable.sol";
+import "./SafeMath.sol";
+import "./Ownable.sol";
+import "../IWETH.sol";
 
 contract Agora is Ownable {
+    using SafeMath for uint256;
 
-    IERC20 public immutable polis;
+    IWETH public immutable WETH;
 
     event TreasurySent(address recipient, uint256 amount);
 
-    constructor(IERC20 _polis) {
-        polis = _polis;
-    }
-    
-    // ** View functions ** //
-
-    function getTreasuryBalance() external view returns(uint256) {
-        return polis.balanceOf(address(this));
+    constructor(address _WETH) {
+        WETH = IWETH(_WETH);
     }
 
-    function fundAddress(address _recipient, uint256 _amount) external onlyOwner {
-        polis.transfer(_recipient, _amount);
+    function deposit() external payable {
+        WETH.deposit{value: msg.value}();
+    }
+
+    function fund(address _recipient, uint256 _amount) external onlyOwner {
+        WETH.transfer(_recipient, _amount);
         emit TreasurySent(_recipient, _amount);
     }
 
-    function extractToken(address _recipient, uint256 _amount, IERC20 _token) external onlyOwner {
-        require(address(_token) != address(polis), "invalid");
-        require(_token.balanceOf(address(this)) >= _amount, "not enough balance");
-        _token.transfer(_recipient, _amount);
-    }
+
 }

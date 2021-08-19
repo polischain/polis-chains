@@ -1,5 +1,7 @@
 const hre = require("hardhat");
 
+const DAO_MULTISIG = "";
+
 async function main() {
     const [owner] = await ethers.getSigners();
 
@@ -151,6 +153,31 @@ async function main() {
         [owner.address],
         validatorSetProxy.address
     )
+    await tx.wait()
+
+    console.log("Changing ownership to the DAO multi-signature account")
+    tx = await validatorSetProxy.changeAdmin(DAO_MULTISIG)
+    await tx.wait()
+
+    tx = await blockRewardProxy.changeAdmin(DAO_MULTISIG)
+    await tx.wait()
+
+    tx = await randomProxy.changeAdmin(DAO_MULTISIG)
+    await tx.wait()
+
+    tx = await stakingProxy.changeAdmin(DAO_MULTISIG)
+    await tx.wait()
+
+    tx = await governanceProxy.changeAdmin(DAO_MULTISIG)
+    await tx.wait()
+
+    tx = await txPermissionProxy.changeAdmin(DAO_MULTISIG)
+    await tx.wait()
+
+    tx = await certifierProxy.changeAdmin(DAO_MULTISIG)
+    await tx.wait()
+
+    tx = await registry.setOwner(DAO_MULTISIG)
     await tx.wait()
 
     console.log("\n AuRa Deployment Finished: \n")

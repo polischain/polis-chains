@@ -13,22 +13,24 @@
 // modified to match solidity compiler requirements
 
 
-pragma solidity 0.8.7;
+pragma solidity 0.7.6;
 pragma experimental ABIEncoderV2;
 
-import "./interfaces/IERC20.sol";
-import "./GovToken.sol";
+import "./SafeMath.sol";
+import "./Drachma.sol";
+
 
 contract Parliament {
+    using SafeMath for uint256;
 
     /// @notice The name of this contract
-    string public constant name = "POLIS Governance Parliament";
+    string public constant name = "POLIS Parliament";
 
     /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed
-    function quorumVotes() public view returns (uint) { return govToken.totalSupply() / (25); } // 4% of Supply
+    function quorumVotes() public view returns (uint) { return govToken.totalSupply().div(25); } // 4% of Supply
 
     /// @notice The number of votes required in order for a voter to become a proposer
-    function proposalThreshold() public view returns (uint) { return govToken.totalSupply() / (uint256(1000)); } // 0.1% of Supply
+    function proposalThreshold() public view returns (uint) { return govToken.totalSupply().div(uint256(1000)); } // 0.1% of Supply
 
     /// @notice The maximum number of actions that can be included in a proposal
     function proposalMaxOperations() public pure returns (uint) { return 10; } // 10 actions
@@ -43,7 +45,7 @@ contract Parliament {
     TimelockInterface public timelock;
 
     /// @notice The address of the governance token
-    GovToken public govToken;
+    Drachma public govToken;
 
     /// @notice The address of the Governor Guardian
     address public guardian;
@@ -148,7 +150,7 @@ contract Parliament {
 
     constructor(address timelock_, address govToken_, address guardian_) {
         timelock = TimelockInterface(timelock_);
-        govToken = GovToken(govToken_);
+        govToken = Drachma(govToken_);
         guardian = guardian_;
     }
 
@@ -309,7 +311,7 @@ contract Parliament {
     }
 
     function __changeGuardian(address _guardian) public {
-        require(msg.sender == guardian, "GovernorAlpha::__changeGuardian: sender must be gov guardian");
+        require(msg.sender == guardian, "Parliament::__changeGuardian: sender must be gov guardian");
         guardian = _guardian;
     }
 
@@ -334,7 +336,7 @@ contract Parliament {
         return a - b;
     }
 
-    function getChainId() internal view returns (uint256) {
+    function getChainId() internal pure returns (uint256) {
         uint256 chainId;
         assembly { chainId := chainid() }
         return chainId;

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity 0.7.6;
 
 import "./Context.sol";
 
@@ -10,28 +10,34 @@ import "./Context.sol";
  * specific functions.
  *
  * By default, the owner account will be the one that deploys the contract. This
- * can later be changed with {transferOwnership}.
+ * can later be changed with {proposeOwner/claimOwnership}.
  *
  * This module is used through inheritance. It will make available the modifier
  * `onlyOwner`, which can be applied to your functions to restrict their use to
  * the owner.
  */
-abstract contract Ownable is Context {
+contract Ownable is Context {
     address private _owner;
+    address private proposedOwner;
 
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    event OwnershipTransferred(
+        address indexed previousOwner,
+        address indexed newOwner
+    );
 
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
      */
     constructor() {
-        _setOwner(_msgSender());
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
     }
 
     /**
      * @dev Returns the address of the current owner.
      */
-    function owner() public view virtual returns (address) {
+    function owner() public view returns (address) {
         return _owner;
     }
 
@@ -39,7 +45,7 @@ abstract contract Ownable is Context {
      * @dev Throws if called by any account other than the owner.
      */
     modifier onlyOwner() {
-        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
         _;
     }
 
@@ -51,21 +57,28 @@ abstract contract Ownable is Context {
      * thereby removing any functionality that is only available to the owner.
      */
     function renounceOwnership() public virtual onlyOwner {
-        _setOwner(address(0));
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
+        proposedOwner = address(0);
     }
 
     /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * @dev Proposes a new owner of the contract to a new account (`newOwner`).
      * Can only be called by the current owner.
      */
-    function transferOwnership(address newOwner) public virtual onlyOwner {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
-        _setOwner(newOwner);
+    function proposeOwner(address _proposedOwner) public onlyOwner {
+        require(msg.sender != _proposedOwner, "ERROR_CALLER_ALREADY_OWNER");
+        proposedOwner = _proposedOwner;
     }
 
-    function _setOwner(address newOwner) private {
-        address oldOwner = _owner;
-        _owner = newOwner;
-        emit OwnershipTransferred(oldOwner, newOwner);
+    /**
+     * @dev If the address has been proposed, it can accept the ownership,
+     * Can only be called by the current proposed owner.
+     */
+    function claimOwnership() public {
+        require(msg.sender == proposedOwner, "ERROR_NOT_PROPOSED_OWNER");
+        emit OwnershipTransferred(_owner, proposedOwner);
+        _owner = proposedOwner;
+        proposedOwner = address(0);
     }
 }
