@@ -40,8 +40,8 @@ contract BlockRewardAuRaCoins is BlockRewardAuRaBase, IBlockRewardAuRaCoins {
     function transferReward(uint256 _nativeCoins, address payable _to) external onlyStakingContract {
         uint256 agora_reward = _nativeCoins.mul(80).div(100);
         IAgora(AGORA_ADDRESS).deposit.value(agora_reward)();
-        uint256 native_coin_reward = _nativeCoins - agora_reward;
-        _transferNativeReward(native_coin_reward, _to);
+        uint256 reward = _nativeCoins.sub(agora_reward);
+        _transferNativeReward(reward, _to);
     }
 
     // ============ POLIS MODIFICATIONS: END =============== //

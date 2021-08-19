@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "compile": "npm run flat && hardhat compile",
+    "compile": "hardhat compile",
     "flat": "bash scripts/flat.sh",
     "deploy:test": "hardhat run --network hardhat scripts/deploy_posdao.js",
     "deploy:sparta": "hardhat run --network sparta scripts/deploy_posdao.js"

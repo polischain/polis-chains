@@ -1,6 +1,6 @@
 const hre = require("hardhat");
 
-const DAO_MULTISIG = "";
+const DAO_MULTISIG = process.env.DAO_MULTISIG;
 
 async function main() {
     const [owner] = await ethers.getSigners();
@@ -19,18 +19,65 @@ async function main() {
     console.log("Stake withdrawal disallow period:  ", process.env.STAKE_WITHDRAWAL_DISALLOW_PERIOD, "blocks")
     console.log("Collect round length:              ", process.env.COLLECT_ROUND_LENGTH, "blocks")
 
-    console.log("\n Deploying Contracts \n")
+    console.log("\n ==> Deploying Contracts \n")
 
-    const ValidatorSetAuRa = await ethers.getContractFactory("contracts/posdao/ValidatorSetAuRa.sol:ValidatorSetAuRa");
-    const BlockRewardAuRa = await ethers.getContractFactory("contracts/posdao/BlockRewardAuRa.sol:BlockRewardAuRa");
-    const RandomAuRa = await ethers.getContractFactory("contracts/posdao/RandomAuRa.sol:RandomAuRa");
-    const StakingAuRa = await ethers.getContractFactory("contracts/posdao/StakingAuRa.sol:StakingAuRa");
-    const Governance = await ethers.getContractFactory("contracts/posdao/Governance.sol:Governance");
-    const TxPermission = await ethers.getContractFactory("contracts/posdao/TxPermission.sol:TxPermission");
-    const Certifier = await ethers.getContractFactory("contracts/posdao/Certifier.sol:Certifier");
-    const Registry = await ethers.getContractFactory("contracts/posdao/Registry.sol:Registry");
+    const ValidatorSetAuRa = await ethers.getContractFactory("ValidatorSetAuRa");
+    const BlockRewardAuRa = await ethers.getContractFactory("BlockRewardAuRa");
+    const RandomAuRa = await ethers.getContractFactory("RandomAuRa");
+    const StakingAuRa = await ethers.getContractFactory("StakingAuRa");
+    const Governance = await ethers.getContractFactory("Governance");
+    const TxPermission = await ethers.getContractFactory("TxPermission");
+    const Certifier = await ethers.getContractFactory("Certifier");
+    const Registry = await ethers.getContractFactory("Registry");
+    const Agora = await ethers.getContractFactory("Agora");
+    const Timelock = await ethers.getContractFactory("Timelock");
+    const Parliament = await ethers.getContractFactory("Parliament");
+    const Drachma = await ethers.getContractFactory("Drachma");
+    const WETH = await ethers.getContractFactory("WETH9");
 
     const Proxy = await ethers.getContractFactory("contracts/posdao/upgradeability/AdminUpgradeabilityProxy.sol:AdminUpgradeabilityProxy");
+
+    console.log("==> Deploying Polis Governance Contracts")
+
+    console.log("Deploying WETH")
+    let weth = await WETH.deploy()
+    await weth.deployed()
+
+    console.log("Deploying Drachma")
+    let drachma = await Drachma.deploy()
+    await drachma.deployed()
+
+    console.log("Deploying Agora")
+    let agora = await Agora.deploy(weth.address)
+    await agora.deployed()
+
+    console.log("Deploying Timelock")
+    // Set delay to 1 week
+    let timelock = await Timelock.deploy(owner.address, 604800)
+    await timelock.deployed()
+
+    console.log("Deploying Parliament")
+    let parliament = await Parliament.deploy(timelock.address, drachma.address, owner.address)
+    await parliament.deployed()
+
+    console.log("==> Setting Polis Governance Ownerships")
+
+    let tx = await agora.proposeOwner(timelock.address);
+    await tx.wait()
+
+    tx = await timelock.claimAddress(agora.address);
+    await tx.wait()
+
+    tx = await timelock.setPendingAdmin(parliament.address);
+    await tx.wait()
+
+    tx = await parliament.__acceptAdmin();
+    await tx.wait()
+
+    tx = await parliament.__changeGuardian(DAO_MULTISIG);
+    await tx.wait()
+
+    console.log("==> Deploying POSDAO Contracts")
 
     console.log("Deploying ValidatorSetAuRa")
     let validatorSet = await ValidatorSetAuRa.deploy()
@@ -78,11 +125,11 @@ async function main() {
     let registry = await Registry.deploy(certifierProxy.address, owner.address)
     await registry.deployed()
 
-    console.log("\n Initializing contracts \n")
+    console.log("\n ==> Initializing POSDAO contracts \n")
 
     console.log("Initializing ValidatorSetAuRa")
     const validatorSetProxyAccess = ValidatorSetAuRa.attach(validatorSetProxy.address)
-    let tx = await validatorSetProxyAccess.initialize(
+    tx = await validatorSetProxyAccess.initialize(
         blockRewardProxy.address,
         governanceProxy.address,
         randomProxy.address,
@@ -97,7 +144,8 @@ async function main() {
     const blockRewardProxyAccess = BlockRewardAuRa.attach(blockRewardProxy.address)
     tx = await blockRewardProxyAccess.initialize(
         validatorSetProxy.address,
-        owner.address
+        owner.address,
+        agora.address
     )
     await tx.wait()
 
@@ -155,7 +203,7 @@ async function main() {
     )
     await tx.wait()
 
-    console.log("Changing ownership to the DAO multi-signature account")
+    console.log("==> Setting POSDAO ownership to DAO multi-signature account")
     tx = await validatorSetProxy.changeAdmin(DAO_MULTISIG)
     await tx.wait()
 
@@ -179,6 +227,13 @@ async function main() {
 
     tx = await registry.setOwner(DAO_MULTISIG)
     await tx.wait()
+
+    console.log("\n Polis Governance Deployment Finished: \n")
+    console.log("WETH:              ", weth.address)
+    console.log("Drachma:           ", drachma.address)
+    console.log("Agora:             ", agora.address)
+    console.log("Timelock:          ", timelock.address)
+    console.log("Parliament:        ", parliament.address)
 
     console.log("\n AuRa Deployment Finished: \n")
     console.log("Please add the following information to the chain spec json:")

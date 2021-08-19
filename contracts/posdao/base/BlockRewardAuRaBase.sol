@@ -17,7 +17,7 @@ contract Sacrifice {
 
 
 /// @dev Generates and distributes rewards according to the logic and formulas described in the POSDAO white paper.
-contract BlockRewardAuRaBase is UpgradeableOwned, IBlockRewardAuRa {
+contract BlockRewardAuRaBase is UpgradeableOwned {
     using SafeMath for uint256;
 
     // =============================================== Storage ========================================================
