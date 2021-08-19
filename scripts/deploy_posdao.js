@@ -53,7 +53,7 @@ async function main() {
 
     console.log("Deploying Timelock")
     // Set delay to 1 week
-    let timelock = await Timelock.deploy(owner.address, 604800)
+    let timelock = await Timelock.deploy(owner.address, 86400)
     await timelock.deployed()
 
     console.log("Deploying Parliament")
