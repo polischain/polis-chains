@@ -35,7 +35,7 @@ async function main() {
     const Drachma = await ethers.getContractFactory("Drachma");
     const WETH = await ethers.getContractFactory("WETH9");
 
-    const Proxy = await ethers.getContractFactory("contracts/posdao/upgradeability/AdminUpgradeabilityProxy.sol:AdminUpgradeabilityProxy");
+    const Proxy = await ethers.getContractFactory("AdminUpgradeabilityProxy");
 
     console.log("==> Deploying Polis Governance Contracts")
 

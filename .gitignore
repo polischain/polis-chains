@@ -26,3 +26,6 @@ manifesto/*.fls
 manifesto/*.log
 manifesto/*.out
 manifesto/*.toc
+
+# Deploys
+scripts/replace_staking.js
