@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rm -rf contracts/flat
+rm -rf flat
 ROOT=contracts/
 
 POSDAO=posdao/
@@ -12,7 +12,7 @@ POSDAO_UPGRADEABILITY_FULLPATH="$ROOT""$POSDAO_UPGRADEABILITY"
 DAO=dao/
 DAO_FULLPATH="$ROOT""$DAO"
 
-FLAT=contracts/flat/
+FLAT=flat/
 
 iterate_sources() {
   files=$(ls "$1"*.sol)

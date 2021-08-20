@@ -114,7 +114,7 @@ contract BlockRewardAuRaBase is UpgradeableOwned {
     address public AGORA_ADDRESS;
 
     // Agora percentage reward to the community treasury.
-    uint256 public AGORA_REWARD_PERCENTAGE = 20;
+    uint256 public constant AGORA_REWARD_PERCENTAGE = 20;
 
     // ============ POLIS MODIFICATIONS: END =============== //
 

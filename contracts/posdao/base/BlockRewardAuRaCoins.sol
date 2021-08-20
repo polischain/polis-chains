@@ -38,7 +38,7 @@ contract BlockRewardAuRaCoins is BlockRewardAuRaBase, IBlockRewardAuRaCoins {
     //  in the _nativeCoins param and reduce the amount passed to _transferNativeReward by 20%
 
     function transferReward(uint256 _nativeCoins, address payable _to) external onlyStakingContract {
-        uint256 agora_reward = _nativeCoins.mul(80).div(100);
+        uint256 agora_reward = _nativeCoins.mul(AGORA_REWARD_PERCENTAGE).div(100);
         IAgora(AGORA_ADDRESS).deposit.value(agora_reward)();
         uint256 reward = _nativeCoins.sub(agora_reward);
         _transferNativeReward(reward, _to);
