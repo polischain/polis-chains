@@ -5,7 +5,7 @@
 node_modules/
 
 # Solidity
-contracts/flat/
+flat/
 
 # App
 .env
