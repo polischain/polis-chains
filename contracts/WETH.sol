@@ -35,6 +35,7 @@ contract WETH9 {
     function() public payable {
         deposit();
     }
+
     function deposit() public payable {
         balanceOf[msg.sender] += msg.value;
         Deposit(msg.sender, msg.value);

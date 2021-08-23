@@ -2,12 +2,10 @@
 
 pragma solidity 0.7.6;
 
-import "./SafeMath.sol";
 import "./Ownable.sol";
 import "../IWETH.sol";
 
 contract Agora is Ownable {
-    using SafeMath for uint256;
 
     IWETH public immutable WETH;
 
@@ -22,6 +20,7 @@ contract Agora is Ownable {
     }
 
     function fund(address _recipient, uint256 _amount) external onlyOwner {
+        require(WETH.balanceOf(address(this)) >= _amount, "Agora: not enough balance to fund proposal");
         WETH.transfer(_recipient, _amount);
         emit TreasurySent(_recipient, _amount);
     }

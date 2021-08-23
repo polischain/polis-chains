@@ -16,7 +16,7 @@ contract Drachma is Ownable {
 
     uint256 private _totalSupply;
 
-    string private constant _name = "Staked Polis";
+    string private constant _name = "Governance Polis";
     string private constant _symbol = "DRACHMA";
     uint8 private constant _decimals = 18;
 
