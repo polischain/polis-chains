@@ -10,7 +10,7 @@ services:
       --base-path=/root/data
       --max-peers=100
       --jsonrpc-port=8545
-      --jsonrpc-interface local
+      --jsonrpc-interface all
       --jsonrpc-apis web3,eth,net,parity,pubsub,traces
       --ws-interface local
       --fat-db=on
