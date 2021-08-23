@@ -9,9 +9,9 @@ services:
       --chain=sparta
       --base-path=/root/data
       --max-peers=100
-      --jsonrpc-interface all
+      --jsonrpc-interface local
       --jsonrpc-apis web3,eth,net,parity,pubsub,traces
-      --ws-interface all
+      --ws-interface local
       --fat-db=on
       --pruning=archive
       --ws-apis all
