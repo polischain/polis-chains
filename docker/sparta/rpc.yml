@@ -23,6 +23,4 @@ services:
     ports:
       - '30303:30303/udp'
       - '30303:30303'
-      - $IP_LOCAL:"8545:8545"
-      - $IP_LOCAL:"8546:8546"
     restart: always
