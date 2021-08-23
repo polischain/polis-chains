@@ -36,8 +36,8 @@ function run_sparta_rpc() {
     -e NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES=eth,subscribe,trace,txpool,web3,proof,net,parity,health \
     -e NETHERMIND_JSONRPCCONFIG_ENABLED=true \
     -e NETHERMIND_JSONRPCCONFIG_HOST=0.0.0.0 \
-    -p 8545:8545 \
-    -p 8546:8546 \
+    -p "$IP_LOCAL":8545:8545 \
+    -p "$IP_LOCAL":8546:8546 \
     -v "$(pwd)"/db/:/nethermind/nethermind_db/ \
     -v "$(pwd)"/keystore/:/nethermind/keystore/ \
     -v "$(pwd)"/logs/:/nethermind/logs/ \
