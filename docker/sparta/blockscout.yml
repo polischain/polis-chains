@@ -1,19 +1,51 @@
 version: '3.7'
 services:
+  node:
+    init: true
+    container_name: node
+    image: ghcr.io/polischain/openethereum:main
+    user: root
+    command:
+      --chain=sparta
+      --base-path=/root/data
+      --max-peers=100
+      --jsonrpc-interface all
+      --jsonrpc-apis web3,eth,net,parity,pubsub,traces
+      --ws-interface all
+      --fat-db=on
+      --pruning=archive
+      --ws-apis all
+      --ws-origins all
+      --ws-hosts all
+      --ws-port 8546
+    volumes:
+      - ./node_data:/root/data
+    expose:
+      - "8545"
+      - "8546"
+    ports:
+      - "8546:8546"
+      - "8545:8545"
+      - "30303:30303"
+      - "30303:30303/udp"
+    restart: always
   blockscout:
     image: ghcr.io/polischain/blockscout:master
     ports:
       - '4000:4000'
+    depends_on:
+      - node
+      - postgres
     environment:
-      DATABASE_URL: $DATABASE_URL
+      DATABASE_URL: "postgresql://blockscout:let-me-in@host.docker.internal:5432/blockscout?ssl=false"
       COIN: "polis"
       NETWORK: "Polis"
       SUBNETWORK: "Sparta"
       LOGO: "/images/polis_logo.svg"
       ETHEREUM_JSONRPC_VARIANT: "parity"
-      ETHEREUM_JSONRPC_HTTP_URL: "https://sparta-rpc.polis.tech"
-      ETHEREUM_JSONRPC_TRACE_URL: "https://sparta-rpc.polis.tech"
-      ETHEREUM_JSONRPC_WS_URL: "https://ws.sparta-rpc.polis.tech"
+      ETHEREUM_JSONRPC_HTTP_URL: "http://host.docker.internal:8545"
+      ETHEREUM_JSONRPC_TRACE_URL: "http://host.docker.internal:8545"
+      ETHEREUM_JSONRPC_WS_URL: "ws://host.docker.internal:8546"
       SECRET_KEY_BASE: "RMgI4C1HSkxsEjdhtGMfwAHfyT6CKWXOgzCboJflfSm4jeAlic52io05KB6mqzc5"
       PORT: "4000"
       MIX_ENV: "prod"
@@ -24,5 +56,18 @@ services:
       SHOW_TXS_CHART: "true"
       ENABLE_TXS_STATS: "true"
       ENABLE_POS_STAKING_IN_MENU: "true"
-      POS_STAKING_CONTRACT: "0xDE37F4B8eEF87fbeD82b28E6C706719E281FfBBD"
+      POS_STAKING_CONTRACT: "0x9eB738D4678B276F5d6B5043849502B683d2cC93"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: bash -c "mix do ecto.migrate && mix phx.server"
+  postgres:
+    image: postgres
+    ports:
+      - '5432:5432'
+    command: ["postgres", "-cshared_preload_libraries=pg_stat_statements"]
+    environment:
+      POSTGRES_USER: blockscout
+      POSTGRES_PASSWORD: let-me-in
+      POSTGRES_DB: blockscout
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data

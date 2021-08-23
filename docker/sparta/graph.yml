@@ -1,5 +1,32 @@
 version: '3.7'
 services:
+  node:
+    init: true
+    container_name: node
+    image: ghcr.io/polischain/openethereum:main
+    user: root
+    command:
+      --chain=sparta
+      --base-path=/root/data
+      --pruning=archive
+      --max-peers=100
+      --tx-time-limit=1000
+      --jsonrpc-port=8545
+      --jsonrpc-cors=all
+      --jsonrpc-interface=all
+      --jsonrpc-hosts=all
+      --jsonrpc-apis=web3,eth,net,parity,traces
+      --fat-db="on"
+      --tracing="on"
+    volumes:
+      - ./node_data:/root/data
+    expose:
+      - "8545"
+    ports:
+      - "8545:8545"
+      - "30303:30303"
+      - "30303:30303/udp"
+    restart: always
   graph-node:
     image: graphprotocol/graph-node
     ports:
@@ -9,10 +36,19 @@ services:
       - '8030:8030'
       - '8040:8040'
     depends_on:
+      - node
       - ipfs
+      - postgres
     environment:
-      postgres-url: $DATABASE_URL
-      ethereum: 'sparta:https://sparta-rpc.polis.tech'
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: 'ipfs:5001'
+      ethereum: 'sparta:http://host.docker.internal:8545'
+      GRAPH_LOG: debug
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: always
   ipfs:
     image: ipfs/go-ipfs:v0.4.23
@@ -20,4 +56,16 @@ services:
       - '5001:5001'
     volumes:
       - ./data/ipfs:/data/ipfs
+    restart: always
+  postgres:
+    image: postgres
+    ports:
+      - '5432:5432'
+    command: ["postgres", "-cshared_preload_libraries=pg_stat_statements"]
+    environment:
+      POSTGRES_USER: graph-node
+      POSTGRES_PASSWORD: let-me-in
+      POSTGRES_DB: graph-node
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
     restart: always
