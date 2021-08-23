@@ -1,0 +1,189 @@
+{
+  "name": "Olympus Chain",
+  "dataDir": "olympus",
+  "engine": {
+    "authorityRound": {
+      "params": {
+        "stepDuration": 5,
+        "blockReward": "0x0",
+        "maximumUncleCountTransition": 0,
+        "maximumUncleCount": 0,
+        "validators": {
+          "multi": {
+            "0": {
+              "list": [
+                ""
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "nodes": [],
+  "params": {
+    "gasLimitBoundDivisor": "0x400",
+    "maximumExtraDataSize": "0x20",
+    "minGasLimit": "0x1388",
+    "networkID": "333999",
+    "eip140Transition": "0x0",
+    "eip211Transition": "0x0",
+    "eip214Transition": "0x0",
+    "eip658Transition": "0x0",
+    "eip145Transition": "0x0",
+    "eip1014Transition": "0x0",
+    "eip1052Transition": "0x0",
+    "eip1283Transition": "0x0",
+    "eip1344Transition": "0x0",
+    "eip1706Transition": "0x0",
+    "eip1884Transition": "0x0",
+    "eip2028Transition": "0x0",
+    "eip2929Transition": "0x0",
+    "eip2930Transition": "0x0"
+  },
+  "genesis": {
+    "seal": {
+      "authorityRound": {
+        "step": "0x0",
+        "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "difficulty": "0x20000",
+    "gasLimit": "0x5F5E100"
+  },
+  "accounts": {
+    "0000000000000000000000000000000000000005": {
+      "builtin": {
+        "name": "modexp",
+        "pricing": {
+          "0": {
+            "price": {
+              "modexp2565": {}
+            }
+          }
+        }
+      }
+    },
+    "0000000000000000000000000000000000000006": {
+      "builtin": {
+        "name": "alt_bn128_add",
+        "pricing": {
+          "0": {
+            "price": {
+              "alt_bn128_const_operations": {
+                "price": 150
+              }
+            }
+          }
+        }
+      }
+    },
+    "0000000000000000000000000000000000000007": {
+      "builtin": {
+        "name": "alt_bn128_mul",
+        "pricing": {
+          "0": {
+            "price": {
+              "alt_bn128_const_operations": {
+                "price": 6000
+              }
+            }
+          }
+        }
+      }
+    },
+    "0000000000000000000000000000000000000008": {
+      "builtin": {
+        "name": "alt_bn128_pairing",
+        "pricing": {
+          "0": {
+            "price": {
+              "alt_bn128_pairing": {
+                "base": 45000,
+                "pair": 34000
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000009": {
+      "builtin": {
+        "name": "blake2_f",
+        "pricing": {
+          "0": {
+            "price": {
+              "blake2_f": {
+                "gas_per_round": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000001": {
+      "balance": "1",
+      "builtin": {
+        "name": "ecrecover",
+        "pricing": {
+          "0": {
+            "price": {
+              "linear": {
+                "base": 3000,
+                "word": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000002": {
+      "balance": "1",
+      "builtin": {
+        "name": "sha256",
+        "pricing": {
+          "0": {
+            "price": {
+              "linear": {
+                "base": 60,
+                "word": 12
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000003": {
+      "balance": "1",
+      "builtin": {
+        "name": "ripemd160",
+        "pricing": {
+          "0": {
+            "price": {
+              "linear": {
+                "base": 600,
+                "word": 120
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000004": {
+      "balance": "1",
+      "builtin": {
+        "name": "identity",
+        "pricing": {
+          "0": {
+            "price": {
+              "linear": {
+                "base": 15,
+                "word": 3
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
