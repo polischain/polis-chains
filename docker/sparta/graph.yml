@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  graph-node:
+    image: graphprotocol/graph-node
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+      - '8020:8020'
+      - '8030:8030'
+      - '8040:8040'
+    depends_on:
+      - ipfs
+    environment:
+      postgres-url: $DATABASE_URL
+      ethereum: 'sparta:https://sparta-rpc.polis.tech'
+    restart: always
+  ipfs:
+    image: ipfs/go-ipfs:v0.4.23
+    ports:
+      - '5001:5001'
+    volumes:
+      - ./data/ipfs:/data/ipfs
+    restart: always

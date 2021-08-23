@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  blockscout:
+    image: ghcr.io/polischain/blockscout:master
+    ports:
+      - '4000:4000'
+    environment:
+      DATABASE_URL: $DATABASE_URL
+      COIN: "polis"
+      NETWORK: "Polis"
+      SUBNETWORK: "Sparta"
+      LOGO: "/images/polis_logo.svg"
+      ETHEREUM_JSONRPC_VARIANT: "parity"
+      ETHEREUM_JSONRPC_HTTP_URL: "https://sparta-rpc.polis.tech"
+      ETHEREUM_JSONRPC_TRACE_URL: "https://sparta-rpc.polis.tech"
+      ETHEREUM_JSONRPC_WS_URL: "https://ws.sparta-rpc.polis.tech"
+      SECRET_KEY_BASE: "RMgI4C1HSkxsEjdhtGMfwAHfyT6CKWXOgzCboJflfSm4jeAlic52io05KB6mqzc5"
+      PORT: "4000"
+      MIX_ENV: "prod"
+      CHAIN_ID: "333888"
+      CHAIN_SPEC_PATH: "https://raw.githubusercontent.com/polischain/polis-chains/main/specs/sparta.json"
+      LINK_TO_OTHER_EXPLORER: "false"
+      SHOW_PRICE_CHART: "false"
+      SHOW_TXS_CHART: "true"
+      ENABLE_TXS_STATS: "true"
+      ENABLE_POS_STAKING_IN_MENU: "true"
+      POS_STAKING_CONTRACT: "0xDE37F4B8eEF87fbeD82b28E6C706719E281FfBBD"
+    command: bash -c "mix do ecto.migrate && mix phx.server"
