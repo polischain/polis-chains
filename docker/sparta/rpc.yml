@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+node:
+  init: true
+  container_name: node
+  image: ghcr.io/polischain/openethereum:main
+  user: root
+  command:
+    --chain=sparta
+    --base-path=/root/data
+    --max-peers=100
+    --jsonrpc-interface all
+    --jsonrpc-apis web3,eth,net,parity,pubsub,traces
+    --ws-interface all
+    --fat-db=on
+    --pruning=archive
+    --ws-apis all
+    --ws-origins all
+    --ws-hosts all
+    --ws-port 8546
+  volumes:
+    - ./node_data:/root/data
+  restart: always
