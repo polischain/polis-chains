@@ -52,6 +52,10 @@
     "gasLimit": "0x5F5E100"
   },
   "accounts": {
+    "0xd94dded3f37416f994d72fb28443e000acb4a18a" : {
+      "_tx": "https://bscscan.com/tx/0x209d96b93127b454e6397ec3bca176a8911df6f6da8bfe1ad8682b37d3dd78bf",
+      "balance": "1146038887549499934464"
+    },
     "0000000000000000000000000000000000000005": {
       "builtin": {
         "name": "modexp",
