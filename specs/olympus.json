@@ -52,6 +52,10 @@
     "gasLimit": "0x5F5E100"
   },
   "accounts": {
+    "0xfafb66028a3cd56624580c4503520f850c780ad8": {
+      "_tx": "https://bscscan.com/tx/0xe40124fb198bd4d426142ce28b275f602443545de6d970a13b21b0fd3ca26bc8",
+      "balance": "3187021583854484608184"
+    },
     "0x5eC86d4d826bF3e12Ee2486B9dF01d7CFa99B6Ca": {
       "_tx": "https://bscscan.com/tx/0xebe2f609d0996c905facf2a60c27a52747ee081644e6e38c01f07eaf7583a5b2",
       "_comments": "DAO sent the balance to run a validator to the technical team because there is not multi-sig on the new chain",
