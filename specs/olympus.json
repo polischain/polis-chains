@@ -52,6 +52,30 @@
     "gasLimit": "0x5F5E100"
   },
   "accounts": {
+    "0xe980b6d70a4ec6292dd6c405735d9c9054cdfced": {
+      "_tx": "https://bscscan.com/tx/0x35892b70b64d596cc91d484cee1fb5cf73feac4996c64311f57abb5efdee0241",
+      "balance": "1000000000000000000"
+    },
+    "0xeeb0602a6059837d173e4217db493548a82a15a7": {
+      "_tx": "https://bscscan.com/tx/0x6a82780def5614c6aa6d5843e997cf48c855963cc257b9513b15ade886378fbf",
+      "balance": "400000000000000000000"
+    },
+    "0xfa5e5ca19594bc6b094925b767a98e1cf0464112": {
+      "_tx": "https://bscscan.com/tx/0x2e8b380289a16e9431b2d6ef70b663d250eb50cf61edc4fe13f3bdf1e48be2b6",
+      "balance": "229922315368245000000000"
+    },
+    "0x769354a23fcfea505f49705cd4085c4e69aa7ece": {
+      "_tx": "https://bscscan.com/tx/0x233fab18f435eada7eda5ba7cc976021f9f337ed8c45004c5af289a5a2d67d08",
+      "balance": "27360433863563197050880"
+    },
+    "0x66708f1632db63ea7bcc2d7615a1444d28450c53": {
+      "_tx": "https://bscscan.com/tx/0x5326a03e0271f1ff2694542e855a60d4d0cf11cdadc67ca208e11de3713e53b0",
+      "balance": "5000000000000000000"
+    },
+    "0x78d60a7ccd14f637bc4637e4cfd71e39b38d6614": {
+      "_tx": "https://bscscan.com/tx/0x0c6b2e10557f83cb078bcdd8693ae03c91c23a2f39c471a49806f3312b009f52",
+      "balance": "210506293629281897905514"
+    },
     "0x6b4805c6130b1544be4f1aeef1b8b37c532b234e": {
       "_tx1": "https://bscscan.com/tx/0x7e92d70d39845f49117c030337a619b7f8889470da9c24822801cee10816f691",
       "_tx2": "https://bscscan.com/tx/0xc54e00cb434e2e1afbf4776a4ee20da65e43e31bc8fcdd6e0974c5ef58ebfcaf",
