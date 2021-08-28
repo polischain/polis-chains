@@ -57,6 +57,14 @@
       "_tx2": "https://bscscan.com/tx/0xc54e00cb434e2e1afbf4776a4ee20da65e43e31bc8fcdd6e0974c5ef58ebfcaf",
       "balance": "100091081349094131811000"
     },
+    "0xfaf4e1c0db863addafba66b73ecd0b872567480e": {
+      "_tx": "https://bscscan.com/tx/0x48338cbe0feab0d4a5088e4201e4827a825843496a3ab7073f37033abb4467e8",
+      "balance": "26451557800001667072"
+    },
+    "0x6b8b2e45a97f978774cf6621cdbef1b14b5bec16": {
+      "_tx": "https://bscscan.com/tx/0x54e88fba4390c67a133380451db52f7d340540bb476b3ecdd517ffe0473c8b52",
+      "balance": "2099182509751867145492"
+    },
     "0xbe18360a3c5088996a80372e018eebd1454e0c84": {
       "_tx": "https://bscscan.com/tx/0xffc8a69c0e9ae0a2fa0cf4f88619430baf6f956562b4dbc182e58b7bd60baafc",
       "balance": "325292720452700000000"
