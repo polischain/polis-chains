@@ -9,7 +9,6 @@ services:
       - '8030:8030'
       - '8040:8040'
     depends_on:
-      - node
       - ipfs
       - postgres
     environment:
