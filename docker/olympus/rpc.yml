@@ -32,9 +32,12 @@ services:
     command:
       --chain=sparta
       --base-path=/root/data
+      --nat="extip:${EXT_IP}"
       --pruning=archive
       --max-peers=100
       --tx-time-limit=1000
+      --min-gas-price=1000000000
+      --gas-floor-target=20000000
       --jsonrpc-port=8545
       --jsonrpc-cors=all
       --jsonrpc-interface=all
