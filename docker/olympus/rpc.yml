@@ -16,7 +16,7 @@ services:
       CONTACT_DETAILS: "https://t.me/PolisPayOfficial"
       INSTANCE_NAME: ${ETHSTATS_ID}
       WS_SERVER: "wss://dev-netstats.polis.tech/api"
-      WS_SECRET: ${ETHSTATS_KEY}"
+      WS_SECRET: ${ETHSTATS_KEY}
       VERBOSITY: 1
     restart: always
     logging:
