@@ -44,6 +44,10 @@ services:
       --jsonrpc-apis=web3,eth,net,parity,traces
       --fat-db="on"
       --tracing="on"
+      --ws-interface all
+      --ws-apis all
+      --ws-origins all
+      --ws-hosts all
     volumes:
       - ./node_data:/root/data
     ports:
