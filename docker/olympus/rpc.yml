@@ -10,7 +10,7 @@ services:
       - "node"
     environment:
       NODE_ENV: production
-      RPC_HOST: node
+      RPC_HOST: ${IP}
       RPC_PORT: 8545
       LISTENING_PORT: 30303
       CONTACT_DETAILS: ${ETHSTATS_CONTACT}
@@ -37,7 +37,7 @@ services:
       --tx-time-limit=1000
       --jsonrpc-port=8545
       --jsonrpc-cors=all
-      --jsonrpc-interface=local
+      --jsonrpc-interface=${IP}
       --jsonrpc-hosts=all
       --jsonrpc-apis=web3,eth,net,parity,traces
       --fat-db="on"
