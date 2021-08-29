@@ -37,44 +37,19 @@ async function main() {
 
     const Proxy = await ethers.getContractFactory("AdminUpgradeabilityProxy");
 
-    console.log("==> Deploying Polis Governance Contracts")
+    console.log("==> Deploying Polis Agora")
 
     console.log("Deploying WETH")
     let weth = await WETH.deploy()
     await weth.deployed()
 
-    console.log("Deploying Drachma")
-    let drachma = await Drachma.deploy()
-    await drachma.deployed()
-
     console.log("Deploying Agora")
     let agora = await Agora.deploy(weth.address)
     await agora.deployed()
 
-    console.log("Deploying Timelock")
-    // Set delay to 1 week
-    let timelock = await Timelock.deploy(owner.address, 86400)
-    await timelock.deployed()
+    console.log("==> Setting Polis Agora ownerships to DAO")
 
-    console.log("Deploying Parliament")
-    let parliament = await Parliament.deploy(timelock.address, drachma.address, owner.address)
-    await parliament.deployed()
-
-    console.log("==> Setting Polis Governance Ownerships")
-
-    let tx = await agora.proposeOwner(timelock.address);
-    await tx.wait()
-
-    tx = await timelock.claimAddress(agora.address);
-    await tx.wait()
-
-    tx = await timelock.setPendingAdmin(parliament.address);
-    await tx.wait()
-
-    tx = await parliament.__acceptAdmin();
-    await tx.wait()
-
-    tx = await parliament.__changeGuardian(DAO_MULTISIG);
+    let tx = await agora.transferOwnership(DAO_MULTISIG);
     await tx.wait()
 
     console.log("==> Deploying POSDAO Contracts")

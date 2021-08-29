@@ -356,6 +356,16 @@ contract BlockRewardAuRaBase is UpgradeableOwned {
         return _mintNativeCoins(nativeTotalRewardAmount, bridgeQueueLimit);
     }
 
+    // ============ POLIS MODIFICATIONS: START =============== //
+    /// @dev Sets the AGORA_ADDRESS address to receive coins and fund addresses
+    /// @param _agora Agora new address.
+    function setAgoraAddress(address _agora) external onlyOwner onlyInitialized {
+        AGORA_ADDRESS = _agora;
+    }
+
+    // ============ POLIS MODIFICATIONS: END =============== //
+
+
     /// @dev Sets the array of `erc-to-native` bridge addresses which are allowed to call some of the functions with
     /// the `onlyErcToNativeBridge` modifier. This setter can only be called by the `owner`.
     /// @param _bridgesAllowed The array of bridge addresses.
