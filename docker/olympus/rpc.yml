@@ -45,6 +45,7 @@ services:
       --jsonrpc-apis=web3,eth,net,parity,traces
       --fat-db="on"
       --tracing="on"
+      --ws-port=8546
       --ws-interface all
       --ws-apis=web3,eth,net,parity,traces
       --ws-origins all
