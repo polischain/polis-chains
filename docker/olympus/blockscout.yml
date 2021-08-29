@@ -15,7 +15,7 @@ services:
       ETHEREUM_JSONRPC_VARIANT: "parity"
       ETHEREUM_JSONRPC_HTTP_URL: "https://rpc.polis.tech"
       ETHEREUM_JSONRPC_TRACE_URL: "https://rpc.polis.tech"
-      ETHEREUM_JSONRPC_WS_URL: "https://rpc-ws.polis.tech"
+      ETHEREUM_JSONRPC_WS_URL: "wss://rpc-ws.polis.tech"
       SECRET_KEY_BASE: "RMgI4C1HSkxsEjdhtGMfwAHfyT6CKWXOgzCboJflfSm4jeAlic52io05KB6mqzc5"
       PORT: "4000"
       MIX_ENV: "prod"
