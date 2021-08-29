@@ -13,10 +13,10 @@ services:
       RPC_HOST: ${IP}
       RPC_PORT: 8545
       LISTENING_PORT: 30303
-      CONTACT_DETAILS: ${ETHSTATS_CONTACT}
+      CONTACT_DETAILS: "https://t.me/PolisPayOfficial"
       INSTANCE_NAME: ${ETHSTATS_ID}
-      WS_SERVER: "wss://sparta-stats.polis.tech/api"
-      WS_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
+      WS_SERVER: "wss://netstats.dev.polis.tech/api"
+      WS_SECRET: ${ETHSTATS_KEY}"
       VERBOSITY: 1
     restart: always
     logging:
