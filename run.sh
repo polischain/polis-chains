@@ -45,6 +45,47 @@ function run_sparta_validator() {
     ghcr.io/polischain/polis-chains:main
 }
 
+function run_olympus_simple() {
+  echo "==> Starting Polis node on OLYMPUS network"
+  docker run -d --restart=always \
+    -p 30303:30303 \
+    -p 30303:30303/udp \
+    -e NETHERMIND_CONFIG=olympus \
+    -e NETHERMIND_ETHSTATSCONFIG_ENABLED="true" \
+    -e NETHERMIND_ETHSTATSCONFIG_SECRET="EfxqGbcCZnxBPNgqb2UcWqgJK49VnKZv" \
+    -e NETHERMIND_ETHSTATSCONFIG_SERVER="wss://netstats.polis.tech/api" \
+    -e NETHERMIND_ETHSTATSCONFIG_NAME="$NAME" \
+    -e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
+    -v "$(pwd)"/db/:/nethermind/nethermind_db/ \
+    -v "$(pwd)"/keystore/:/nethermind/keystore/ \
+    -v "$(pwd)"/logs/:/nethermind/logs/ \
+    ghcr.io/polischain/polis-chains:main
+}
+
+function run_olympus_validator() {
+  echo "==> Starting Polis node on OLYMPUS network and enabled for mining"
+	docker run -d --restart=always \
+    -p 30303:30303 \
+    -p 30303:30303/udp \
+    -e NETHERMIND_CONFIG=sparta_validator \
+    -e NETHERMIND_ETHSTATSCONFIG_ENABLED="true" \
+    -e NETHERMIND_ETHSTATSCONFIG_SECRET="EfxqGbcCZnxBPNgqb2UcWqgJK49VnKZv" \
+    -e NETHERMIND_ETHSTATSCONFIG_SERVER="wss://netstats.polis.tech/api" \
+    -e NETHERMIND_ETHSTATSCONFIG_NAME="$NAME" \
+    -e NETHERMIND_INITCONFIG_ISMINING="true" \
+    -e NETHERMIND_MININGCONFIG_ENABLED="true" \
+    -e NETHERMIND_MININGCONFIG_MINGASPRICE="1000000000" \
+    -e NETHERMIND_MININGCONFIG_TARGETBLOCKGASLIMIT="20000000" \
+    -e NETHERMIND_KEYSTORECONFIG_BLOCKAUTHORACCOUNT="$ACCOUNT" \
+    -e NETHERMIND_KEYSTORECONFIG_UNLOCKACCOUNTS="$ACCOUNT" \
+    -e NETHERMIND_KEYSTORECONFIG_PASSWORDFILES=/nethermind/passwords/"$ACCOUNT" \
+    -v "$(pwd)"/passwords/:/nethermind/passwords/ \
+    -v "$(pwd)"/db/:/nethermind/nethermind_db/ \
+    -v "$(pwd)"/keystore/:/nethermind/keystore \
+    -v "$(pwd)"/logs/:/nethermind/logs/ \
+    ghcr.io/polischain/polis-chains:main
+}
+
 function run_sparta() {
 case "$TYPE" in
 "validator")
@@ -53,7 +94,7 @@ case "$TYPE" in
   bash scripts/docker.sh &> /dev/null
   if [ "$ACCOUNT" == "" ]
     then
-      echo "Please specify the account used to mine as the third argument (./run.sh sparta validator 0x123...123"
+      echo "Please specify the account used to sign blocks as the third argument (./run.sh sparta validator 0x123...123"
     else
       run_sparta_validator
   fi
@@ -66,6 +107,31 @@ case "$TYPE" in
 ;;
 *)
 echo "Unknown configuration type for SPARTA please specify a node setup: rpc, explorer, validator, node"
+    ;;
+esac
+}
+
+function run_olympus() {
+case "$TYPE" in
+"validator")
+  echo "==> Running a node for OLYMPUS configured with validator configuration"
+  echo "==> Checking docker installation..."
+  bash scripts/docker.sh &> /dev/null
+  if [ "$ACCOUNT" == "" ]
+    then
+      echo "Please specify the account used to sign blocks as the third argument (./run.sh sparta validator 0x123...123"
+    else
+      run_olympus_validator
+  fi
+;;
+"node")
+  echo "==> Running a simple node for OLYMPUS"
+  echo "==> Checking docker installation..."
+  bash scripts/docker.sh &> /dev/null
+  run_olympus_simple
+;;
+*)
+echo "Unknown configuration type for OLYMPUS please specify a node setup: rpc, explorer, validator, node"
     ;;
 esac
 }
@@ -88,11 +154,15 @@ case "$NETWORK" in
       run_sparta
       screen -dm watch -n 30 ./scripts/fixtime.sh
 ;;
+"olympus")
+      run_olympus
+      screen -dm watch -n 30 ./scripts/fixtime.sh
+;;
 "generate")
       run_gen
 ;;
 *)
-    echo "Unknown network, please specify sparta (for testnet)"
+    echo "Unknown network, please specify sparta (for testnet) or olympus (for mainnet)"
     exit
     ;;
 esac
