@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  blockscout:
+    image: ghcr.io/polischain/blockscout:master
+    ports:
+      - '4000:4000'
+    depends_on:
+      - node
+      - postgres
+    environment:
+      DATABASE_URL: "postgresql://blockscout:let-me-in@host.docker.internal:5432/blockscout?ssl=false"
+      COIN: "polis"
+      NETWORK: "Polis"
+      SUBNETWORK: "Sparta"
+      LOGO: "/images/polis_logo.svg"
+      ETHEREUM_JSONRPC_VARIANT: "parity"
+      ETHEREUM_JSONRPC_HTTP_URL: "https://rpc.polis.tech"
+      ETHEREUM_JSONRPC_TRACE_URL: "https://rpc.polis.tech"
+      ETHEREUM_JSONRPC_WS_URL: "https://rpc.ws.polis.tech"
+      SECRET_KEY_BASE: "RMgI4C1HSkxsEjdhtGMfwAHfyT6CKWXOgzCboJflfSm4jeAlic52io05KB6mqzc5"
+      PORT: "4000"
+      MIX_ENV: "prod"
+      CHAIN_ID: "333888"
+      CHAIN_SPEC_PATH: "https://raw.githubusercontent.com/polischain/polis-chains/main/specs/sparta.json"
+      LINK_TO_OTHER_EXPLORER: "false"
+      SHOW_PRICE_CHART: "false"
+      SHOW_TXS_CHART: "true"
+      ENABLE_TXS_STATS: "true"
+      ENABLE_POS_STAKING_IN_MENU: "true"
+      #POS_STAKING_CONTRACT: "0xDE37F4B8eEF87fbeD82b28E6C706719E281FfBBD"
+    command: bash -c "mix do ecto.migrate && mix phx.server"
+  postgres:
+    image: postgres
+    ports:
+      - '5432:5432'
+    command: ["postgres", "-cshared_preload_libraries=pg_stat_statements"]
+    environment:
+      POSTGRES_USER: blockscout
+      POSTGRES_PASSWORD: let-me-in
+      POSTGRES_DB: blockscout
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data

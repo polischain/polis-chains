@@ -1,5 +1,29 @@
 version: '3.7'
 services:
+  agent:
+    init: true
+    container_name: ethstats
+    image: xdaichain/ethstats-agent:latest
+    links:
+      - "node"
+    depends_on:
+      - "node"
+    environment:
+      NODE_ENV: production
+      RPC_HOST: node
+      RPC_PORT: 8545
+      LISTENING_PORT: 30303
+      CONTACT_DETAILS: ${ETHSTATS_CONTACT}
+      INSTANCE_NAME: ${ETHSTATS_ID}
+      WS_SERVER: "wss://sparta-stats.polis.tech/api"
+      WS_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
+      VERBOSITY: 1
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "10"
   node:
     init: true
     container_name: node
@@ -20,10 +44,7 @@ services:
       --tracing="on"
     volumes:
       - ./node_data:/root/data
-    expose:
-      - "8545"
     ports:
-      - "8545:8545"
       - "30303:30303"
       - "30303:30303/udp"
     restart: always
