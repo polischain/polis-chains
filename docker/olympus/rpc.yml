@@ -37,7 +37,7 @@ services:
       --tx-time-limit=1000
       --jsonrpc-port=8545
       --jsonrpc-cors=all
-      --jsonrpc-interface=${IP}
+      --jsonrpc-interface=local
       --jsonrpc-hosts=all
       --jsonrpc-apis=web3,eth,net,parity,traces
       --fat-db="on"
