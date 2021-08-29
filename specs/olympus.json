@@ -52,6 +52,16 @@
     "gasLimit": "0x5F5E100"
   },
   "accounts": {
+    "0x9990c314a6a78fb9f038dc2fde43d506c9be30c6": {
+      "_tx1": "https://bscscan.com/tx/0xa098b49ee622d08418b9b41a90fed016536bb3feed1580758b3f399e0b54bd5c",
+      "_tx2": "https://bscscan.com/tx/0xd77b21f41b6e45effc5fcc5d341adf3b113ab7b4a16ef1898c430ab1e5752cbd",
+      "_tx3": "https://bscscan.com/tx/0x76534a72001f559494be6b0d7fbb492812d776b7c070f3cb972179e8abf83ce2",
+      "balance": "297378393076749548166000"
+    },
+    "0x068982d5d9e24165dfaa861987b4f4ac93eae28f": {
+      "_tx": "https://bscscan.com/tx/0xd504c2766ff9c22e2c21b66a7b26017ebcbc537088ed910ecc9c5003a5cc49d0",
+      "balance": "141000000000000000000000"
+    },
     "0xc7a79767f60f1d01bddbcc3bbe1b3c64b9b4eb06": {
       "_tx": "https://bscscan.com/tx/0x1f08e769cfd9a94a6a729e948ea8962826bb756079e849008fa08f2415bcb550",
       "balance": "1003684312159209254953"
