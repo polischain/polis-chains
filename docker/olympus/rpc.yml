@@ -49,6 +49,7 @@ services:
       --ws-apis=web3,eth,net,parity,traces
       --ws-origins all
       --ws-hosts all
+      --logging="rpc=trace"
     volumes:
       - ./node_data:/root/data
     ports:
