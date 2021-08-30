@@ -31,7 +31,6 @@ services:
     user: root
     command:
       --chain=sparta
-      --nat="extip:${EXT_IP}"
       --base-path=/root/data
       --pruning=archive
       --max-peers=100
