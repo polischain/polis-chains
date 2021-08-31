@@ -13,7 +13,7 @@ services:
       SUBNETWORK: "Sparta"
       LOGO: "/images/polis_logo.svg"
       ETHEREUM_JSONRPC_VARIANT: "parity"
-      ETHEREUM_JSONRPC_HTTP_URL: "httsp://sparta-rpc.polis.tech"
+      ETHEREUM_JSONRPC_HTTP_URL: "https://sparta-rpc.polis.tech"
       ETHEREUM_JSONRPC_TRACE_URL: "https://sparta-rpc.polis.tech"
       ETHEREUM_JSONRPC_WS_URL: "wss://sparta-rpc.ws.polis.tech"
       SECRET_KEY_BASE: "RMgI4C1HSkxsEjdhtGMfwAHfyT6CKWXOgzCboJflfSm4jeAlic52io05KB6mqzc5"
