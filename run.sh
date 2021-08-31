@@ -67,7 +67,7 @@ function run_olympus_validator() {
 	docker run -d --restart=always \
     -p 30303:30303 \
     -p 30303:30303/udp \
-    -e NETHERMIND_CONFIG=sparta_validator \
+    -e NETHERMIND_CONFIG=olympus_validator \
     -e NETHERMIND_ETHSTATSCONFIG_ENABLED="true" \
     -e NETHERMIND_ETHSTATSCONFIG_SECRET="EfxqGbcCZnxBPNgqb2UcWqgJK49VnKZv" \
     -e NETHERMIND_ETHSTATSCONFIG_SERVER="wss://netstats.polis.tech/api" \

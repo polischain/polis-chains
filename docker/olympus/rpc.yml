@@ -30,7 +30,7 @@ services:
     image: ghcr.io/polischain/openethereum:main
     user: root
     command:
-      --chain=sparta
+      --chain=olympus
       --base-path=/root/data
       --pruning=archive
       --max-peers=100
