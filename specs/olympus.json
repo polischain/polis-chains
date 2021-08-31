@@ -12,7 +12,7 @@
           "multi": {
             "0": {
               "list": [
-                ""
+                "0x7c95b00664654ae15316c853ca0f182a18b157d0"
               ]
             }
           }
@@ -49,7 +49,7 @@
       }
     },
     "difficulty": "0x20000",
-    "gasLimit": "0x5F5E100"
+    "gasLimit": "0x1312D00"
   },
   "accounts": {
     "0xe97010166c434d19e262492f4944d5c36bf41397": {
