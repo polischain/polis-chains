@@ -35,6 +35,8 @@ services:
       --pruning=archive
       --max-peers=100
       --tx-time-limit=1000
+      --min-gas-price=1000000000
+      --gas-floor-target=20000000
       --jsonrpc-port=8545
       --jsonrpc-cors=all
       --jsonrpc-interface=all
@@ -42,11 +44,16 @@ services:
       --jsonrpc-apis=web3,eth,net,parity,traces
       --fat-db="on"
       --tracing="on"
+      --ws-port=8546
+      --ws-interface all
+      --ws-apis=web3,eth,net,parity,traces
+      --ws-origins all
+      --ws-hosts all
+      --logging="rpc=debug"
     volumes:
       - ./node_data:/root/data
-    expose:
-      - "8545"
     ports:
+      - "8546:8546"
       - "8545:8545"
       - "30303:30303"
       - "30303:30303/udp"
