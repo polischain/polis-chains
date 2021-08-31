@@ -886,6 +886,7 @@
     "0x5eC86d4d826bF3e12Ee2486B9dF01d7CFa99B6Ca": {
       "_tx1": "https://bscscan.com/tx/0xca25ebd447023d9075969221fda1ba73de163a651eac051066f528bcbfcec3a9",
       "_tx2": "https://bscscan.com/tx/0xebe2f609d0996c905facf2a60c27a52747ee081644e6e38c01f07eaf7583a5b2",
+      "_comment": "This transaction is not rewarded to the sender since it involves a Gnosis Safe multi-signature wallet. The transactions are from the DAO multi-sig and the Tech multi-sig",
       "balance": "1601100000000000000000000"
     },
     "0xd94dded3f37416f994d72fb28443e000acb4a18a": {
