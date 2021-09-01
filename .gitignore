@@ -29,3 +29,8 @@ manifesto/*.toc
 
 # Deploys
 scripts/replace_staking.js
+
+# Balances
+txs.csv
+balances.json
+scripts/parse.js
