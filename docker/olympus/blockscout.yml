@@ -20,7 +20,7 @@ services:
       PORT: "4000"
       MIX_ENV: "prod"
       CHAIN_ID: "333999"
-      CHAIN_SPEC_PATH: "https://raw.githubusercontent.com/polischain/polis-chains/main/specs/sparta.json"
+      CHAIN_SPEC_PATH: "https://raw.githubusercontent.com/polischain/polis-chains/main/specs/olympus.json"
       LINK_TO_OTHER_EXPLORER: "false"
       SHOW_PRICE_CHART: "false"
       SHOW_TXS_CHART: "true"
