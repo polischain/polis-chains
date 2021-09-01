@@ -20,7 +20,10 @@
       }
     }
   },
-  "nodes": [],
+  "nodes": [
+    "enode://0d932f8db9d7e86a51029967af4af7073ea0c9a2f8a8ee05523d5912445f03af2748e5a2b501d390000c55075196026d480dbb9da6860a38724ed319192c38ab@137.184.27.179:30303",
+    "enode://b10621c9654e5456aad0117645e85016e1b138f6189f77c46040153ac52ac396282fc373e555a0c6bd075a5b028fa6c099348f055468ff20b51be38a8e9a8cf1@209.126.87.184:30303"
+  ],
   "params": {
     "gasLimitBoundDivisor": "0x400",
     "maximumExtraDataSize": "0x20",
