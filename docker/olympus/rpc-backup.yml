@@ -8,7 +8,7 @@ services:
     volumes:
       - ./node_data:/root/data
     environment:
-        NETHERMIND_CONFIG: "olympus"
+        NETHERMIND_CONFIG: "olympus_archive"
         NETHERMIND_ETHSTATSCONFIG_ENABLED: "true"
         NETHERMIND_ETHSTATSCONFIG_SECRET: ${ETHSTATS_KEY}
         NETHERMIND_ETHSTATSCONFIG_SERVER: "wss://dev-netstats.polis.tech/api"
