@@ -1,3 +1,3 @@
-date=$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)
-
-sudo date -s "$date"Z
+echo sudo date -s '"$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z"' > fixtime.sh
+chmod +x fixtime.sh
+screen -S time
