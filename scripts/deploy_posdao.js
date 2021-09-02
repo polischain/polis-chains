@@ -4,7 +4,7 @@ const DAO_MULTISIG = process.env.DAO_MULTISIG;
 const AGORA = process.env.AGORA;
 
 async function main() {
-    const [owner] = await ethers.getSigners();
+    const [owner] = await hre.ethers.getSigners();
 
     let initial_miners = process.env.INITIAL_MINERS.split(",")
     let initial_stakers = process.env.INITIAL_STAKERS.split(",")
@@ -22,16 +22,16 @@ async function main() {
 
     console.log("\n ==> Deploying Contracts \n")
 
-    const ValidatorSetAuRa = await ethers.getContractFactory("ValidatorSetAuRa");
-    const BlockRewardAuRa = await ethers.getContractFactory("BlockRewardAuRa");
-    const RandomAuRa = await ethers.getContractFactory("RandomAuRa");
-    const StakingAuRa = await ethers.getContractFactory("StakingAuRa");
-    const Governance = await ethers.getContractFactory("Governance");
-    const TxPermission = await ethers.getContractFactory("TxPermission");
-    const Certifier = await ethers.getContractFactory("Certifier");
-    const Registry = await ethers.getContractFactory("Registry");
+    const ValidatorSetAuRa = await hre.ethers.getContractFactory("ValidatorSetAuRa");
+    const BlockRewardAuRa = await hre.ethers.getContractFactory("BlockRewardAuRa");
+    const RandomAuRa = await hre.ethers.getContractFactory("RandomAuRa");
+    const StakingAuRa = await hre.ethers.getContractFactory("StakingAuRa");
+    const Governance = await hre.ethers.getContractFactory("Governance");
+    const TxPermission = await hre.ethers.getContractFactory("TxPermission");
+    const Certifier = await hre.ethers.getContractFactory("Certifier");
+    const Registry = await hre.ethers.getContractFactory("Registry");
 
-    const Proxy = await ethers.getContractFactory("AdminUpgradeabilityProxy");
+    const Proxy = await hre.ethers.getContractFactory("AdminUpgradeabilityProxy");
 
     console.log("==> Deploying POSDAO Contracts")
 
@@ -85,7 +85,7 @@ async function main() {
 
     console.log("Initializing ValidatorSetAuRa")
     const validatorSetProxyAccess = ValidatorSetAuRa.attach(validatorSetProxy.address)
-    tx = await validatorSetProxyAccess.initialize(
+    let tx = await validatorSetProxyAccess.initialize(
         blockRewardProxy.address,
         governanceProxy.address,
         randomProxy.address,

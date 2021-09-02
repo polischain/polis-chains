@@ -10,7 +10,8 @@
     "compile": "hardhat compile",
     "flat": "bash scripts/flat.sh",
     "deploy:test": "hardhat run --network hardhat scripts/deploy_posdao.js",
-    "deploy:sparta": "hardhat run --network sparta scripts/deploy_posdao.js"
+    "deploy:sparta": "hardhat run --network sparta scripts/deploy_posdao.js",
+    "deploy:olympus": "hardhat run --network olympus scripts/deploy_posdao.js"
   },
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "2.0.2",

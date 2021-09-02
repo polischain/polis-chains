@@ -14,9 +14,18 @@
               "list": [
                 "0x7c95b00664654ae15316c853ca0f182a18b157d0"
               ]
+            },
+            "361898": {
+              "contract": "0x636278bAd2D76AAC5E9bAcfd185687c8901063E9"
             }
           }
-        }
+        },
+        "blockRewardContractAddress": "0xaFD771EB70C7f8300ED1EbD186A3C453674571f2",
+        "blockRewardContractTransition": 361898,
+        "randomnessContractAddress": {
+          "361898": "0xF8Cb5D38c09Cf94eff8970F2305E7b3f12792555"
+        },
+        "posdaoTransition": 361898
       }
     }
   },
@@ -46,7 +55,10 @@
     "eip1884Transition": "0x0",
     "eip2028Transition": "0x0",
     "eip2929Transition": "0x0",
-    "eip2930Transition": "0x0"
+    "eip2930Transition": "0x0",
+    "registrar": "0x90FA83e997D8e5e3500B98cd5688109ff737aF76",
+    "transactionPermissionContract": "0x4ADfCb56E557Ff3006Dcf71738b905cB7B15bCAd",
+    "transactionPermissionContractTransition": 361898
   },
   "genesis": {
     "seal": {
