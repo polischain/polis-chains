@@ -152,11 +152,9 @@ function run() {
 case "$NETWORK" in
 "sparta")
       run_sparta
-      screen -dm watch -n 30 ./scripts/fixtime.sh
 ;;
 "olympus")
       run_olympus
-      screen -dm watch -n 30 ./scripts/fixtime.sh
 ;;
 "generate")
       run_gen
