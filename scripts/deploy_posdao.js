@@ -1,6 +1,7 @@
 const hre = require("hardhat");
 
 const DAO_MULTISIG = process.env.DAO_MULTISIG;
+const AGORA = process.env.AGORA;
 
 async function main() {
     const [owner] = await ethers.getSigners();
@@ -29,28 +30,8 @@ async function main() {
     const TxPermission = await ethers.getContractFactory("TxPermission");
     const Certifier = await ethers.getContractFactory("Certifier");
     const Registry = await ethers.getContractFactory("Registry");
-    const Agora = await ethers.getContractFactory("Agora");
-    const Timelock = await ethers.getContractFactory("Timelock");
-    const Parliament = await ethers.getContractFactory("Parliament");
-    const Drachma = await ethers.getContractFactory("Drachma");
-    const WETH = await ethers.getContractFactory("WETH9");
 
     const Proxy = await ethers.getContractFactory("AdminUpgradeabilityProxy");
-
-    console.log("==> Deploying Polis Agora")
-
-    console.log("Deploying WETH")
-    let weth = await WETH.deploy()
-    await weth.deployed()
-
-    console.log("Deploying Agora")
-    let agora = await Agora.deploy(weth.address)
-    await agora.deployed()
-
-    console.log("==> Setting Polis Agora ownerships to DAO")
-
-    let tx = await agora.transferOwnership(DAO_MULTISIG);
-    await tx.wait()
 
     console.log("==> Deploying POSDAO Contracts")
 
@@ -120,7 +101,7 @@ async function main() {
     tx = await blockRewardProxyAccess.initialize(
         validatorSetProxy.address,
         owner.address,
-        agora.address
+        AGORA
     )
     await tx.wait()
 
@@ -202,13 +183,6 @@ async function main() {
 
     tx = await registry.setOwner(DAO_MULTISIG)
     await tx.wait()
-
-    console.log("\n Polis Governance Deployment Finished: \n")
-    console.log("WETH:              ", weth.address)
-    console.log("Drachma:           ", drachma.address)
-    console.log("Agora:             ", agora.address)
-    console.log("Timelock:          ", timelock.address)
-    console.log("Parliament:        ", parliament.address)
 
     console.log("\n AuRa Deployment Finished: \n")
     console.log("Please add the following information to the chain spec json:")

@@ -35,6 +35,7 @@ services:
       --pruning=archive
       --max-peers=100
       --tx-time-limit=1000
+      --min-gas-price=1000000000
       --jsonrpc-port=8545
       --jsonrpc-cors=all
       --jsonrpc-interface=all
