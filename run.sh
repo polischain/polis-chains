@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 NETWORK=$1
 TYPE=$2
 ACCOUNT=$3
