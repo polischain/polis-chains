@@ -6,7 +6,8 @@ services:
     image: ghcr.io/polischain/polis-chains:main
     user: root
     volumes:
-      - ./node_data:/root/data
+      - ./node_data/db:/nethermind/nethermind_db/
+      - ./node_data/keystore/:/nethermind/keystore
     environment:
       NETHERMIND_CONFIG: "olympus_archive"
       NETHERMIND_ETHSTATSCONFIG_ENABLED: "true"
