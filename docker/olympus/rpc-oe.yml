@@ -10,7 +10,7 @@ services:
       - "node"
     environment:
       NODE_ENV: production
-      RPC_HOST: ${IP}
+      RPC_HOST: node
       RPC_PORT: 8545
       LISTENING_PORT: 30303
       CONTACT_DETAILS: "https://t.me/PolisPayOfficial"
