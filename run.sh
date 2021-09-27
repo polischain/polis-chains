@@ -68,7 +68,7 @@ function run_olympus_validator() {
 	docker run -d --restart=always \
     -p 30303:30303 \
     -p 30303:30303/udp \
-    -p 80:8545 \
+    -p 8545:8545 \
     -e NETHERMIND_CONFIG=olympus_validator \
     -e NETHERMIND_AURACONFIG_FORCESEALING="true" \
     -e NETHERMIND_ETHSTATSCONFIG_ENABLED="true" \
