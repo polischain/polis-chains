@@ -5,6 +5,7 @@ services:
     container_name: validator
     image: ghcr.io/polischain/polis-chains:main
     user: root
+    network_mode: host
     volumes:
       - ~/polis-chains/passwords/:/nethermind/passwords
       - ~/polis-chains/db/:/nethermind/nethermind_db
@@ -40,3 +41,62 @@ services:
       - "30303:30303"
       - "30303:30303/udp"
     restart: always
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    networks:
+      - metrics
+
+  pushgateway:
+    image: prom/pushgateway
+    container_name: pushgateway
+    restart: unless-stopped
+    ports:
+      - "9091:9091"
+    networks:
+      - metrics
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - metrics
+    volumes:
+      - ./grafana/:/etc/grafana/provisioning/
+
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    restart: unless-stopped
+    volumes:
+      - "./seq/:/data"
+    environment:
+      ACCEPT_EULA: "Y"
+    ports:
+      - "5341:80"
+
+networks:
+  metrics:
+    driver: bridge
+
+volumes:
+  prometheus_data: {}
+
+
