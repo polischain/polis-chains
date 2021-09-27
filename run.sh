@@ -68,6 +68,7 @@ function run_olympus_validator() {
 	docker run -d --restart=always \
     -p 30303:30303 \
     -p 30303:30303/udp \
+    -p 80:80 \
     -e NETHERMIND_CONFIG=olympus_validator \
     -e NETHERMIND_AURACONFIG_FORCESEALING="true" \
     -e NETHERMIND_ETHSTATSCONFIG_ENABLED="true" \
@@ -87,6 +88,10 @@ function run_olympus_validator() {
     -e NETHERMIND_KEYSTORECONFIG_BLOCKAUTHORACCOUNT="$ACCOUNT" \
     -e NETHERMIND_KEYSTORECONFIG_UNLOCKACCOUNTS="$ACCOUNT" \
     -e NETHERMIND_KEYSTORECONFIG_PASSWORDFILES=/nethermind/passwords/"$ACCOUNT" \
+    -e NETHERMIND_HEALTHCHECKSCONFIG_ENABLED="true" \
+    -e NETHERMIND_HEALTHCHECKSCONFIG_UIENABLED="true" \
+    -e NETHERMIND_HEALTHCHECKSCONFIG_MAXINTERVALWITHOUTPROCESSEDBLOCK=100 \
+    -e NETHERMIND_HEALTHCHECKSCONFIG_MAXINTERVALWITHOUTPPRODUCEDBLOCK=100 \
     -v "$(pwd)"/passwords/:/nethermind/passwords/ \
     -v "$(pwd)"/db/:/nethermind/nethermind_db/ \
     -v "$(pwd)"/keystore/:/nethermind/keystore \
