@@ -11,6 +11,7 @@ services:
       - ~/polis-chains/db/:/nethermind/nethermind_db
       - ~/polis-chains/keystore/:/nethermind/keystore
       - ~/polis-chains/logs/:/nethermind/logs/
+      - ./NLog.config:/nethermind/NLog.config
     environment:
       NETHERMIND_CONFIG: "olympus_validator"
       NETHERMIND_AURACONFIG_FORCESEALING: "true"
