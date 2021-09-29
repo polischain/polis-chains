@@ -7,11 +7,10 @@ services:
     user: root
     network_mode: host
     volumes:
-      - ~/polis-chains/passwords/:/nethermind/passwords
-      - ~/polis-chains/db/:/nethermind/nethermind_db
-      - ~/polis-chains/keystore/:/nethermind/keystore
-      - ~/polis-chains/logs/:/nethermind/logs/
-      - ./NLog.config:/nethermind/NLog.config
+      - ../../passwords/:/nethermind/passwords
+      - ../../db/:/nethermind/nethermind_db
+      - ../../keystore/:/nethermind/keystore
+      - ../../logs/:/nethermind/logs/
     environment:
       NETHERMIND_CONFIG: "olympus_validator"
       NETHERMIND_AURACONFIG_FORCESEALING: "true"
