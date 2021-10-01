@@ -11,6 +11,7 @@ services:
       - ../../db/:/nethermind/nethermind_db
       - ../../keystore/:/nethermind/keystore
       - ../../logs/:/nethermind/logs/
+      - ./NLog.config:/nethermind/NLog.config
     environment:
       NETHERMIND_CONFIG: "olympus_validator"
       NETHERMIND_AURACONFIG_FORCESEALING: "true"
