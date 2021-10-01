@@ -56,7 +56,7 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention=200h'
       - '--web.enable-lifecycle'
-    restart: unless-stopped
+    restart: always
     ports:
       - "9090:9090"
     networks:
@@ -65,7 +65,7 @@ services:
   pushgateway:
     image: prom/pushgateway
     container_name: pushgateway
-    restart: unless-stopped
+    restart: always
     ports:
       - "9091:9091"
     networks:
@@ -74,7 +74,7 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
-    restart: unless-stopped
+    restart: always
     ports:
       - "3000:3000"
     networks:
@@ -85,7 +85,7 @@ services:
   seq:
     image: datalust/seq:latest
     container_name: seq
-    restart: unless-stopped
+    restart: always
     volumes:
       - "./seq/:/data"
     environment:
