@@ -33,17 +33,18 @@ services:
       --chain=olympus
       --base-path=/root/data
       --pruning=archive
-      --max-peers=100
-      --tx-time-limit=1000
-      --min-gas-price=1000000000
-      --jsonrpc-port=8545
+      --max-peers="100"
+      --tx-time-limit="1000"
+      --min-gas-price="1000000000"
+      --jsonrpc-port="8545"
       --jsonrpc-cors=all
+      --gas-floor-target="20000000"
       --jsonrpc-interface=all
       --jsonrpc-hosts=all
       --jsonrpc-apis=all
       --fat-db="on"
       --tracing="on"
-      --ws-port=8546
+      --ws-port="8546"
       --ws-interface all
       --ws-apis=all
       --ws-origins all
