@@ -35,8 +35,6 @@ services:
       --pruning=archive
       --max-peers="100"
       --min-gas-price="1000000000"
-      --force-sealing
-      --fast-unlock
       --jsonrpc-port="8545"
       --jsonrpc-cors=all
       --gas-floor-target="20000000"
