@@ -169,6 +169,8 @@ contract StakingAuRaCoins is StakingAuRaBase {
 
             rewardSum += reward;
         }
+
+        rewardSum = rewardSum.mul(80).div(100);
     }
 
     // ============================================== Internal ========================================================
