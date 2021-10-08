@@ -1,57 +1,24 @@
 version: '3.7'
 services:
-  agent:
-    init: true
-    container_name: ethstats
-    image: xdaichain/ethstats-agent:latest
-    links:
-      - "node"
-    depends_on:
-      - "node"
-    environment:
-      NODE_ENV: production
-      RPC_HOST: node
-      RPC_PORT: 8545
-      LISTENING_PORT: 30303
-      CONTACT_DETAILS: ${ETHSTATS_CONTACT}
-      INSTANCE_NAME: ${ETHSTATS_ID}
-      WS_SERVER: "wss://sparta-stats.polis.tech/api"
-      WS_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
-      VERBOSITY: 1
-    restart: always
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-        max-file: "10"
   node:
     init: true
     container_name: node
-    image: ghcr.io/polischain/openethereum:main
+    image: ghcr.io/polischain/polis-chains:main
     user: root
-    command:
-      --chain=sparta
-      --base-path=/root/data
-      --pruning=archive
-      --max-peers=100
-      --tx-time-limit=1000
-      --min-gas-price=1000000000
-      --gas-floor-target=20000000
-      --jsonrpc-port=8545
-      --jsonrpc-cors=all
-      --jsonrpc-interface=all
-      --jsonrpc-hosts=all
-      --jsonrpc-apis=web3,eth,net,parity,traces
-      --fat-db="on"
-      --tracing="on"
-      --ws-port=8546
-      --ws-interface all
-      --ws-apis=web3,eth,net,parity,traces
-      --ws-origins all
-      --ws-hosts all
-      --logging="rpc=debug"
     volumes:
-      - ./node_data:/root/data
+      - ./node_data/db:/nethermind/nethermind_db/
+      - ./node_data/keystore/:/nethermind/keystore
+    environment:
+      NETHERMIND_CONFIG: "sparta_archive"
+      NETHERMIND_ETHSTATSCONFIG_ENABLED: "true"
+      NETHERMIND_ETHSTATSCONFIG_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
+      NETHERMIND_ETHSTATSCONFIG_SERVER: "wss://dev-netstats.polis.tech/api"
+      NETHERMIND_ETHSTATSCONFIG_NAME: ${ETHSTATS_ID}
+      NETHERMIND_INITCONFIG_WEBSOCKETSENABLED: "true"
+      NETHERMIND_JSONRPCCONFIG_WEBSOCKETSPORT: "8546"
+      NETHERMIND_JSONRPCCONFIG_ENABLEDMODULES: "eth,subscribe,trace,txpool,web3,proof,net,parity,health"
+      NETHERMIND_JSONRPCCONFIG_ENABLED: "true"
+      NETHERMIND_JSONRPCCONFIG_HOST: "0.0.0.0"
     ports:
       - "8546:8546"
       - "8545:8545"
