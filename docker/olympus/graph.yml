@@ -28,7 +28,7 @@ services:
       - ./data/ipfs:/data/ipfs
     restart: always
   postgres:
-    image: postgres
+    image: postgres:13
     command: ["postgres", "-cshared_preload_libraries=pg_stat_statements"]
     environment:
       POSTGRES_USER: graph-node
