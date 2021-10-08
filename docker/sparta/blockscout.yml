@@ -86,7 +86,7 @@ services:
       - "host.docker.internal:host-gateway"
     command: bash -c "mix do ecto.migrate && mix phx.server"
   postgres:
-    image: postgres
+    image: postgres:13
     ports:
       - "5432:5432"
     command: ["postgres", "-cshared_preload_libraries=pg_stat_statements"]
