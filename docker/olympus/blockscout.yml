@@ -26,7 +26,7 @@ services:
       SHOW_TXS_CHART: "true"
       ENABLE_TXS_STATS: "true"
       ENABLE_POS_STAKING_IN_MENU: "true"
-      GAS_PRICE: "1000000000"
+      GAS_PRICE: "1"
       COINGECKO_COIN_ID: "polis"
       POS_STAKING_CONTRACT: "0xF69e9147d88De50c4Bd42F9b41Cbce00841Cc2Dd"
     command: bash -c "mix do ecto.migrate && mix phx.server"
