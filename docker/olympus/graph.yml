@@ -17,7 +17,7 @@ services:
       postgres_pass: let-me-in
       postgres_db: graph-node
       ipfs: 'ipfs:5001'
-      ethereum: 'olympus:https://rpc.polis.tech'
+      ethereum: 'olympus:https://rpc-oe.polis.tech'
       GRAPH_LOG: debug
     restart: always
   ipfs:
