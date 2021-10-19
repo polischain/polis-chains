@@ -61,6 +61,7 @@
     "eip2028Transition": "0x0",
     "eip2929Transition": "0x0",
     "eip2930Transition": "0x0",
+    "eip3607Transition": "0xFFFFFFFFFFFF",
     "registrar": "0x90FA83e997D8e5e3500B98cd5688109ff737aF76",
     "transactionPermissionContract": "0x4ADfCb56E557Ff3006Dcf71738b905cB7B15bCAd",
     "transactionPermissionContractTransition": 361898
