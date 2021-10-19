@@ -9,7 +9,7 @@ services:
       - ./node_data/db:/nethermind/nethermind_db/
       - ./node_data/keystore/:/nethermind/keystore
     environment:
-      NETHERMIND_CONFIG: "olympus_archive"
+      NETHERMIND_CONFIG: "olympus"
       NETHERMIND_ETHSTATSCONFIG_ENABLED: "true"
       NETHERMIND_ETHSTATSCONFIG_SECRET: ${ETHSTATS_KEY}
       NETHERMIND_ETHSTATSCONFIG_SERVER: "wss://dev-netstats.polis.tech/api"
