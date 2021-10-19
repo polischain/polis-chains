@@ -18,7 +18,6 @@ services:
       WS_SERVER: "wss://sparta-stats.polis.tech/api"
       WS_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
       VERBOSITY: 1
-    restart: always
     logging:
       driver: "json-file"
       options:
@@ -58,4 +57,3 @@ services:
       - "8545:8545"
       - "30303:30303"
       - "30303:30303/udp"
-    restart: always
