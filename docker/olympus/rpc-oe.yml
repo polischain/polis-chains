@@ -34,9 +34,10 @@ services:
       --base-path=/root/data
       --pruning=archive
       --max-peers="100"
-      --min-gas-price="0"
+      --min-gas-price="1000000000"
       --jsonrpc-port="8545"
       --jsonrpc-cors=all
+      --gas-floor-target="200000000000000000"
       --jsonrpc-interface=all
       --jsonrpc-hosts=all
       --jsonrpc-apis=all
@@ -48,8 +49,6 @@ services:
       --ws-origins all
       --ws-hosts all
       --logging="info,rpc=debug"
-      --metrics
-      --metrics-port=6060
     volumes:
       - ./node_data:/root/data
     ports:
