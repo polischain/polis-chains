@@ -48,7 +48,7 @@ services:
       --ws-apis=all
       --ws-origins all
       --ws-hosts all
-      --logging="rpc=info"
+      --logging="info,rpc=info"
       --metrics
       --metrics-port=6060
     volumes:
