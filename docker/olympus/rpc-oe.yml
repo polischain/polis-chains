@@ -34,7 +34,7 @@ services:
       --base-path=/root/data
       --pruning=archive
       --max-peers="100"
-      --min-gas-price="1000000000"
+      --min-gas-price="1000000000000000000"
       --jsonrpc-port="8545"
       --jsonrpc-cors=all
       --gas-floor-target="200000000000000000"
