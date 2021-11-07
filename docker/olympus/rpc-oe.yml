@@ -17,7 +17,7 @@ services:
       INSTANCE_NAME: ${ETHSTATS_ID}
       WS_SERVER: "wss://dev-netstats.polis.tech/api"
       WS_SECRET: ${ETHSTATS_KEY}
-      VERBOSITY: 1
+      VERBOSITY: 3
     restart: always
     logging:
       driver: "json-file"
