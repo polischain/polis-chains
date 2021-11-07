@@ -17,7 +17,7 @@ services:
       INSTANCE_NAME: ${ETHSTATS_ID}
       WS_SERVER: "wss://dev-netstats.polis.tech/api"
       WS_SECRET: ${ETHSTATS_KEY}
-      VERBOSITY: 3
+      VERBOSITY: 1
     restart: always
     logging:
       driver: "json-file"
@@ -48,7 +48,7 @@ services:
       --ws-apis=all
       --ws-origins all
       --ws-hosts all
-      --logging="rpc=warn"
+      --logging="rpc=info"
       --metrics
       --metrics-port=6060
     volumes:
