@@ -48,6 +48,8 @@ services:
       --ws-apis=all
       --ws-origins all
       --ws-hosts all
+      --force-sealing
+      --fast-unlock
       --logging="info,rpc=debug"
     volumes:
       - ./node_data:/root/data
