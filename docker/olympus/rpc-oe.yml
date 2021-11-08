@@ -52,7 +52,7 @@ services:
     volumes:
       - ./node_data/data:/root/data
       - ./passwords:/root/password
-      - ./keys:/root/data/keys/olympus/key
+      - ./keys:/root/data/keys/olympus
     ports:
       - "8546:8546"
       - "8545:8545"
