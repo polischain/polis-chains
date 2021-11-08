@@ -34,10 +34,12 @@ services:
       --base-path=/root/data
       --pruning=archive
       --max-peers="100"
-      --min-gas-price=1000000000
       --jsonrpc-port="8545"
       --jsonrpc-cors=all
       --gas-floor-target=20000000
+      --min-gas-price=1000000000
+      --gas-cap=100000000
+      --engine_signer="0xdeadbeefcafe0000000000000000000000000001"
       --jsonrpc-interface=all
       --jsonrpc-hosts=all
       --jsonrpc-apis=all
@@ -49,7 +51,7 @@ services:
       --ws-origins all
       --ws-hosts all
       --force-sealing
-      --fast-unlock
+      --reseal-on-txs="all"
       --logging="info,rpc=debug"
     volumes:
       - ./node_data:/root/data
