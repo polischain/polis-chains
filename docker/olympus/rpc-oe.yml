@@ -39,7 +39,6 @@ services:
       --gas-floor-target=20000000
       --min-gas-price=1000000000
       --gas-cap=100000000
-      --engine-signer="0xdeadbeefcafe0000000000000000000000000001"
       --jsonrpc-interface=all
       --jsonrpc-hosts=all
       --jsonrpc-apis=all
