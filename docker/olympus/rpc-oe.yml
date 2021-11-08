@@ -51,7 +51,7 @@ services:
       --ws-hosts all
       --logging="info,rpc=debug"
     volumes:
-      - ./node_data/data:/root/data
+      - ./node_data:/root/data
       - ./passwords:/root/password
       - ./keys:/root/data/keys/olympus
     ports:
