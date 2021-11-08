@@ -32,6 +32,8 @@ services:
     command:
       --chain=olympus
       --base-path=/root/data
+      --engine-signer="0x276f658ddbfd910e27800ea0232e733e138ac478"
+      --unlock="0x0x276f658ddbfd910e27800ea0232e733e138ac478"
       --pruning=archive
       --max-peers="100"
       --jsonrpc-port="8545"
@@ -48,7 +50,9 @@ services:
       --ws-hosts all
       --logging="info,rpc=debug"
     volumes:
-      - ./node_data:/root/data
+      - ./node_data/data:/root/data
+      - ./passwords:/root/password
+      - ./node_data/key:/root/data/keys/olympus/key
     ports:
       - "8546:8546"
       - "8545:8545"
