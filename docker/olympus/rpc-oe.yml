@@ -36,9 +36,6 @@ services:
       --max-peers="100"
       --jsonrpc-port="8545"
       --jsonrpc-cors=all
-      --min-gas-price=10000000
-      --usd-per-tx=1
-      --usd-per-eth=1
       --jsonrpc-interface=all
       --jsonrpc-hosts=all
       --jsonrpc-apis=all
@@ -49,7 +46,7 @@ services:
       --ws-apis=all
       --ws-origins all
       --ws-hosts all
-      #--logging="info,rpc=debug"
+      --logging="info,rpc=debug"
     volumes:
       - ./node_data:/root/data
     ports:
