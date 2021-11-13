@@ -28,7 +28,7 @@ services:
       CHAIN_ID: "333999"
       CHAIN_SPEC_PATH: "https://raw.githubusercontent.com/polischain/polis-chains/main/specs/olympus.json"
       LINK_TO_OTHER_EXPLORER: "false"
-      SHOW_PRICE_CHART: "true"
+      SHOW_PRICE_CHART: "false"
       SHOW_TXS_CHART: "true"
       ENABLE_TXS_STATS: "true"
       ENABLE_POS_STAKING_IN_MENU: "true"
