@@ -1,57 +1,5 @@
 version: "3.7"
 services:
-  agent:
-    init: true
-    container_name: ethstats
-    image: xdaichain/ethstats-agent:latest
-    links:
-      - "node"
-    depends_on:
-      - "node"
-    environment:
-      NODE_ENV: production
-      RPC_HOST: node
-      RPC_PORT: 8545
-      LISTENING_PORT: 30303
-      CONTACT_DETAILS: ${ETHSTATS_CONTACT}
-      INSTANCE_NAME: ${ETHSTATS_ID}
-      WS_SERVER: "wss://sparta-stats.polis.tech/api"
-      WS_SECRET: "PhD8zsx69jhpqv7PUhzz2mExj66hT8tRknP7Rw7sCC5y79SAgQuZLW6cXUuqjRnv"
-      VERBOSITY: 1
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-        max-file: "10"
-  node:
-    init: true
-    container_name: node
-    image: ghcr.io/polischain/openethereum:main
-    user: root
-    command: --chain=sparta
-      --base-path=/root/data
-      --pruning=archive
-      --max-peers=100
-      --tx-time-limit=1000
-      --jsonrpc-port=8545
-      --jsonrpc-cors=all
-      --jsonrpc-interface=all
-      --jsonrpc-hosts=all
-      --jsonrpc-apis=web3,eth,net,parity,traces
-      --fat-db="on"
-      --tracing="on"
-      --ws-port=8546
-      --ws-interface all
-      --ws-apis=web3,eth,net,parity,traces
-      --ws-origins all
-      --ws-hosts all
-    volumes:
-      - ./node_data:/root/data
-    ports:
-      - "8546:8546"
-      - "8545:8545"
-      - "30303:30303"
-      - "30303:30303/udp"
   blockscout:
     image: ghcr.io/polischain/blockscout:master
     ports:
@@ -66,9 +14,8 @@ services:
       SUBNETWORK: "Sparta"
       LOGO: "/images/polis_logo.svg"
       ETHEREUM_JSONRPC_VARIANT: "parity"
-      ETHEREUM_JSONRPC_HTTP_URL: "http://host.docker.internal:8545"
-      ETHEREUM_JSONRPC_TRACE_URL: "http://host.docker.internal:8545"
-      ETHEREUM_JSONRPC_WS_URL: "ws://host.docker.internal:8546"
+      ETHEREUM_JSONRPC_HTTP_URL: "https://sparta-rpc.polis.tech"
+      ETHEREUM_JSONRPC_TRACE_URL: "https://sparta-rpc.polis.tech"
       SECRET_KEY_BASE: "RMgI4C1HSkxsEjdhtGMfwAHfyT6CKWXOgzCboJflfSm4jeAlic52io05KB6mqzc5"
       PORT: "4000"
       MIX_ENV: "prod"
@@ -80,8 +27,6 @@ services:
       ENABLE_TXS_STATS: "true"
       ENABLE_POS_STAKING_IN_MENU: "true"
       POS_STAKING_CONTRACT: "0xDE37F4B8eEF87fbeD82b28E6C706719E281FfBBD"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     command: bash -c "mix do ecto.migrate && mix phx.server"
   postgres:
     image: postgres:13
