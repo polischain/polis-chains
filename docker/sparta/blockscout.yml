@@ -15,7 +15,6 @@ services:
       ETHEREUM_JSONRPC_VARIANT: "parity"
       ETHEREUM_JSONRPC_HTTP_URL: "https://sparta-rpc.polis.tech"
       ETHEREUM_JSONRPC_TRACE_URL: "https://sparta-rpc.polis.tech"
-      ETHEREUM_JSONRPC_WS_URL: "ws://host.docker.internal:8546"
       SECRET_KEY_BASE: "RMgI4C1HSkxsEjdhtGMfwAHfyT6CKWXOgzCboJflfSm4jeAlic52io05KB6mqzc5"
       PORT: "4000"
       MIX_ENV: "prod"
