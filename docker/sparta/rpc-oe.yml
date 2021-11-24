@@ -53,7 +53,7 @@ services:
     volumes:
       - ./node_data:/root/data
       - ./passwords:/root/password
-      - ./keys:/root/data/keys/olympus
+      - ./keys:/root/data/keys/sparta
     ports:
       - "8546:8546"
       - "8545:8545"
