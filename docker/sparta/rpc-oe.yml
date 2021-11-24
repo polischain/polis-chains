@@ -30,7 +30,7 @@ services:
     image: ghcr.io/polischain/openethereum:main
     user: root
     command:
-      --chain=olympus
+      --chain=sparta
       --base-path=/root/data
       --engine-signer="0x276f658ddbfd910e27800ea0232e733e138ac478"
       --unlock="0x276f658ddbfd910e27800ea0232e733e138ac478"
