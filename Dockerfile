@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 
 RUN apt-get update && \
     apt-get install -y libsnappy-dev libc6-dev libc6
@@ -12,7 +12,7 @@ COPY specs/configs/*.cfg src/Nethermind/Nethermind.Runner/configs
 
 RUN dotnet publish src/Nethermind/Nethermind.Runner -r linux-x64 -c release -o out
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-focal
+FROM mcr.microsoft.com/dotnet/sdk:6.0-focal
 
 RUN apt-get update && apt-get -y install libsnappy-dev libc6-dev libc6
 
