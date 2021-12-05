@@ -35,7 +35,6 @@ services:
       --engine-signer="0x276f658ddbfd910e27800ea0232e733e138ac478"
       --unlock="0x276f658ddbfd910e27800ea0232e733e138ac478"
       --password="/root/password/0x276f658ddbfd910e27800ea0232e733e138ac478"
-      --pruning=archive
       --max-peers="100"
       --jsonrpc-port="8545"
       --jsonrpc-cors=all
