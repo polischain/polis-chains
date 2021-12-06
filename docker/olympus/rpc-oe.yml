@@ -49,7 +49,7 @@ services:
       --ws-apis=all
       --ws-origins all
       --ws-hosts all
-      --logging="info,rpc=debug"
+      --logging="info"
     volumes:
       - ./node_data:/root/data
       - ./passwords:/root/password
