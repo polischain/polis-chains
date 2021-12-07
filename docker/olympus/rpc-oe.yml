@@ -32,12 +32,14 @@ services:
     command:
       --chain=olympus
       --base-path=/root/data
-      --min-gas-price=1000000000
-      --gas-floor-target=20000000
+      --min-gas-price="1000000000"
+      --gas-floor-target="20000000"
+      --gas-cap="1000000000"
       --author="0x276f658ddbfd910e27800ea0232e733e138ac478"
       --engine-signer="0x276f658ddbfd910e27800ea0232e733e138ac478"
       --unlock="0x276f658ddbfd910e27800ea0232e733e138ac478"
       --password="/root/password/0x276f658ddbfd910e27800ea0232e733e138ac478"
+      --force-sealing
       --pruning=archive
       --max-peers="100"
       --jsonrpc-port="8545"
