@@ -34,6 +34,7 @@ services:
       --base-path=/root/data
       --min-gas-price=1000000000
       --gas-floor-target=20000000
+      --author="0x276f658ddbfd910e27800ea0232e733e138ac478"
       --engine-signer="0x276f658ddbfd910e27800ea0232e733e138ac478"
       --unlock="0x276f658ddbfd910e27800ea0232e733e138ac478"
       --password="/root/password/0x276f658ddbfd910e27800ea0232e733e138ac478"
