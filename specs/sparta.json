@@ -12,31 +12,24 @@
           "multi": {
             "0": {
               "list": [
-                "0x20dfc79f4d4b3fc2d26778f5f507235bfb6954c1"
+                "0x43ffa302484810149d3aff045a1d1ce27879b347",
+                "0xe48d11c1f9533a23792230da31665dfcc6cf0045",
+                "0x46b53506f796c3c692b5c94e4f80bbee980cd457",
+                "0x5a826fbb007535db936d0975f986fde605d3b735",
+                "0xa47359abf20250814bceaf87fee6697d674933b7",
+                "0xc43b5918fb73a7d227ebd3ad905c8b93211fd319",
+                "0x27f8e4ff918e83fc7e03927423274aaf773ff61e",
+                "0xac1e8bd211a6ae3025592eeceec2310091d67a79",
+                "0x9512f8a3c3940e9c1e62402164a646518f5fa463",
+                "0x74776c43a3270bf8a2e0eccbd9bdeae8d69dea42"
               ]
-            },
-            "200": {
-              "contract": "0x6F97c21E40b1EC5F96F034f146E94bDC8c1178D1"
             }
           }
-        },
-        "blockRewardContractAddress": "0x4c40CE3fb33A6781c903Bc830804DE4195Cc966f",
-        "blockRewardContractTransition": 200,
-        "randomnessContractAddress": {
-          "200": "0x80A1edDCc5D928D10DDe4E82F1AF4099754A7334"
-        },
-        "posdaoTransition": 200
+        }
       }
     }
   },
-  "nodes": [
-    "enode://e35117ecb66f39eec0702947d779bc909502b75f204af4d9ab37abc455eb2449a5a030179fc2e003b87f25ffd3c3f683ffe1fcb588202e971af68db836eec370@178.128.159.78:30303",
-    "enode://fb2b87a5359024fba2767bc6f1bbf97bf47bb12bc1709cba7160946278e49e9dbde613301869d29ca09377c07ad8f215db5b8cfe6dbc559a462c16ddde8b9138@172.19.0.2:30303",
-    "enode://50a472f50bda6bdba1bf83e8b17b67338132342b3f4a089759102751a2e21d926069a59deab69cf52dba51e59d1e15d0f7d2edbb85893b862f44cbc1990fb4ea@143.244.173.195:30303",
-    "enode://a1d3bf00005ab9d460bf4d5ee290896ca8937cd541ed954a5195c2a5ce560aede0d2dabce5c7a9cc23366b8f5fdf7130acb2730829a93d98183291e55e3afb83@172.23.0.2:30303",
-    "enode://c56281f3290e2303f25e1b97dc2ebcf7bf717ba8f8ea6893071e40d2b08408ffc168ead44f78c2764d7f1f4285dd218c2078c6e6a1214f1d39e6fe8c84eb988f@137.184.202.21:30303",
-    "enode://d423d5ae7f2e9ecd0e045087f1ca219bb8a723e4b763401bdcba677c8fba950a7e9414af2736b69f67bf2da8ea4b99e8d8463e2337277da0531c29c996da4937@137.184.202.22:30303"
-  ],
+  "nodes": [],
   "params": {
     "gasLimitBoundDivisor": "0x400",
     "maximumExtraDataSize": "0x20",
@@ -56,10 +49,7 @@
     "eip2028Transition": "0x0",
     "eip2929Transition": "0x0",
     "eip2930Transition": "0x0",
-    "eip3607Transition": "0xFFFFFFFFFFFF",
-    "registrar": "0xee298d08654597407eC27dD47daF2967bc9ca6f8",
-    "transactionPermissionContract": "0x03016CC13D66F3C29DEC5F91B303Dc35e8359260",
-    "transactionPermissionContractTransition": 200
+    "eip3607Transition": "0xFFFFFFFFFFFF"
   },
   "genesis": {
     "seal": {
