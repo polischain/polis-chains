@@ -24,8 +24,6 @@ services:
       SHOW_PRICE_CHART: "false"
       SHOW_TXS_CHART: "true"
       ENABLE_TXS_STATS: "true"
-      #ENABLE_POS_STAKING_IN_MENU: "true"
-      #POS_STAKING_CONTRACT: "0xDE37F4B8eEF87fbeD82b28E6C706719E281FfBBD"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     command: bash -c "mix do ecto.migrate && mix phx.server"
